@@ -8,7 +8,7 @@ import { Reveal } from "./motion"
 const faqs = [
   {
     q: "When exactly do you open?",
-    a: "Soft-launch in spring 2026. Subscribe to the list and you'll get the date — and a small surprise — before anyone else.",
+    a: "Saturday, 6 June 2026 — soft-launch morning, 9am sharp. Subscribe to the list and you'll get the address and a small surprise before anyone else.",
   },
   {
     q: "Do you have a full menu yet?",
@@ -41,9 +41,9 @@ function Row({ q, a, i }: { q: string; a: string; i: number }) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-6 py-5 text-left group"
+        className="flex w-full items-center justify-between gap-4 sm:gap-6 py-5 text-left group min-h-[44px]"
       >
-        <span className="font-serif text-lg sm:text-xl text-foreground group-hover:text-primary transition-colors">
+        <span className="font-serif text-base xs:text-lg sm:text-xl text-foreground group-hover:text-primary transition-colors">
           {q}
         </span>
         <motion.span
@@ -65,7 +65,7 @@ function Row({ q, a, i }: { q: string; a: string; i: number }) {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="pb-5 pr-12 text-foreground/75 leading-relaxed">{a}</p>
+            <p className="pb-5 pr-2 sm:pr-12 text-sm xs:text-base text-foreground/75 leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -75,16 +75,16 @@ function Row({ q, a, i }: { q: string; a: string; i: number }) {
 
 export function FAQ() {
   return (
-    <section className="bg-background py-20 sm:py-28">
-      <div className="mx-auto max-w-3xl px-6">
+    <section className="bg-background py-12 sm:py-16 cv-auto">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="text-center">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+            <p className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-muted-foreground">
               Soft questions
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
+            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
               Things you&apos;ve been{" "}
               <span className="font-script text-primary">whispering</span> at us.
             </h2>

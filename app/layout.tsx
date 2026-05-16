@@ -22,20 +22,23 @@ const caveat = Caveat({
 })
 
 export const metadata: Metadata = {
-  title: 'Kaizen — Opening Soon in Shillong',
+  title: 'Kaizen — Opening Soon in Guwahati',
   description:
-    'A cozy little cafe coming soon to Shillong. Feel the greens of matcha and taste the crust of pizza. Kaizen — Ranee Villa, Don Bosco Sq, Munchies Compound.',
+    'A cozy little cafe coming soon to Guwahati. Feel the greens of matcha and taste the crust of pizza. Kaizen — Ligang Aloy, Royal Path, near Royal Global University, Betkuchi, Garchuk, Guwahati 781035.',
   generator: 'v0.app',
   openGraph: {
-    title: 'Kaizen — Opening Soon in Shillong',
+    title: 'Kaizen — Opening Soon in Guwahati',
     description:
-      'Feel the greens of matcha & taste the crust of pizza. A cozy cafe opening soon at Ranee Villa, Don Bosco Sq.',
+      'Feel the greens of matcha & taste the crust of pizza. A cozy cafe opening soon at Ligang Aloy, Royal Path, near Royal Global University, Garchuk, Guwahati.',
     type: 'website',
   },
 }
 
 export const viewport = {
   themeColor: '#f3ecd9',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({

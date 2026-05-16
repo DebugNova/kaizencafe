@@ -5,7 +5,17 @@ import { motion } from "framer-motion"
 import { Lock } from "lucide-react"
 import { Reveal } from "./motion"
 
-const items = [
+type MenuItem = {
+  name: string
+  note: string
+  img: string | null
+  alt?: string
+  revealed: boolean
+  script?: string
+  tag?: string
+}
+
+const items: MenuItem[] = [
   {
     name: "The Croissant",
     note: "flaky, buttery, slightly stubborn",
@@ -57,9 +67,9 @@ export function PeekMenu() {
   return (
     <section
       id="peek"
-      className="relative bg-secondary/40 py-20 sm:py-28 border-y border-border/60 overflow-hidden"
+      className="relative bg-secondary/40 py-12 sm:py-16 border-y border-border/60 overflow-hidden cv-auto"
     >
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center max-w-2xl mx-auto">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
@@ -67,7 +77,7 @@ export function PeekMenu() {
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
+            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
               What&apos;s on the{" "}
               <span className="font-script text-primary">chalkboard</span>.
             </h2>
@@ -80,7 +90,7 @@ export function PeekMenu() {
           </Reveal>
         </div>
 
-        <ul className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <ul className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {items.map((it, i) => (
             <motion.li
               key={it.name}
@@ -103,6 +113,7 @@ export function PeekMenu() {
                       alt={it.alt ?? it.name}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                      loading="lazy"
                       className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

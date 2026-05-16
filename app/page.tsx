@@ -4,10 +4,10 @@ import { ScrollProgress } from "@/components/site/scroll-progress"
 import { Hero } from "@/components/site/hero"
 import { Story } from "@/components/site/story"
 import { PeekMenu } from "@/components/site/peek-menu"
-import { BrewingProcess } from "@/components/site/brewing-process"
 import { NoteCollage } from "@/components/site/note-collage"
 import { GalleryMarquee } from "@/components/site/gallery-marquee"
 import { Testimonials } from "@/components/site/testimonials"
+import { EventsPreview } from "@/components/site/events-preview"
 import { Surprises } from "@/components/site/surprises"
 import { FAQ } from "@/components/site/faq"
 import { Visit } from "@/components/site/visit"
@@ -22,13 +22,13 @@ export default function Page() {
       <Hero />
       <Story />
       <PeekMenu />
-      <BrewingProcess />
       <NoteCollage />
       <GalleryMarquee />
-      <Testimonials />
+      <EventsPreview />
       <Surprises />
-      <FAQ />
       <Visit />
+      <FAQ />
+      <Testimonials />
       <Footer />
     </main>
   )

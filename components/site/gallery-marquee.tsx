@@ -24,16 +24,17 @@ function Tile({
   caption: string
 }) {
   return (
-    <figure className="relative h-56 sm:h-64 w-44 sm:w-52 shrink-0 overflow-hidden rounded-sm border border-border/60 bg-card">
+    <figure className="relative h-48 xs:h-56 sm:h-64 w-36 xs:w-44 sm:w-52 shrink-0 overflow-hidden rounded-sm border border-border/60 bg-card">
       <Image
         src={src}
         alt={alt}
         fill
-        sizes="220px"
+        sizes="(min-width: 640px) 220px, 180px"
+        loading="lazy"
         className="object-cover transition-transform duration-700 hover:scale-105"
       />
       <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-3">
-        <span className="font-script text-background text-xl">{caption}</span>
+        <span className="font-script text-background text-lg xs:text-xl">{caption}</span>
       </figcaption>
     </figure>
   )
@@ -43,17 +44,17 @@ export function GalleryMarquee() {
   const track = [...images, ...images]
 
   return (
-    <section className="relative bg-background py-20 sm:py-24 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="flex items-end justify-between gap-6 mb-10">
+    <section className="relative bg-background py-10 sm:py-14 overflow-hidden cv-auto">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10">
           <div>
             <Reveal>
-              <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+              <p className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-muted-foreground">
                 Behind the scenes
               </p>
             </Reveal>
             <Reveal delay={0.08}>
-              <h2 className="mt-3 font-serif text-3xl sm:text-4xl leading-tight">
+              <h2 className="mt-3 font-serif text-2xl xs:text-3xl sm:text-4xl leading-tight text-balance">
                 Snapshots from the{" "}
                 <span className="font-script text-primary">making</span>.
               </h2>
@@ -68,12 +69,12 @@ export function GalleryMarquee() {
         </div>
       </div>
 
-      <div className="relative marquee-pause">
+      <div className="relative">
         {/* edge fades */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-12 xs:w-16 sm:w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-12 xs:w-16 sm:w-24 bg-gradient-to-l from-background to-transparent z-10" />
 
-        <div className="marquee-track-fast flex w-max gap-4">
+        <div className="marquee-track-fast flex w-max gap-3 xs:gap-4">
           {track.map((img, i) => (
             <Tile key={`${img.src}-${i}`} {...img} />
           ))}

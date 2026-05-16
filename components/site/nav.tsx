@@ -6,11 +6,11 @@ import { AnimatePresence, motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 
 const links = [
-  { href: "#story", label: "Our Story" },
-  { href: "#peek", label: "A Little Peek" },
-  { href: "#process", label: "How We Brew" },
-  { href: "#surprises", label: "Surprises" },
-  { href: "#visit", label: "Visit" },
+  { href: "/story", label: "Our Story" },
+  { href: "/#peek", label: "A Little Peek" },
+  { href: "/events", label: "Events" },
+  { href: "/#surprises", label: "Surprises" },
+  { href: "/#visit", label: "Visit" },
 ]
 
 export function Nav() {
@@ -25,12 +25,12 @@ export function Nav() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="#top" className="group flex items-baseline gap-2">
+          <Link href="/" className="group flex items-baseline gap-2">
             <span className="font-serif text-2xl tracking-[0.18em] font-medium transition-colors group-hover:text-primary">
               KAIZEN
             </span>
             <span className="hidden sm:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              Shillong
+              Guwahati
             </span>
           </Link>
 
@@ -56,7 +56,7 @@ export function Nav() {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Link
-                href="#notify"
+                href="/#notify"
                 className="text-sm tracking-wide rounded-full border border-foreground/80 px-4 py-1.5 hover:bg-foreground hover:text-background transition-colors"
               >
                 Notify Me
@@ -65,7 +65,7 @@ export function Nav() {
           </nav>
 
           <button
-            className="md:hidden p-2 -mr-2 text-foreground"
+            className="md:hidden p-3 -mr-3 text-foreground inline-flex items-center justify-center"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -119,16 +119,16 @@ export function Nav() {
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="block py-2 text-sm tracking-wide text-foreground/80 hover:text-primary"
+                      className="block py-3 text-sm tracking-wide text-foreground/80 hover:text-primary min-h-[44px] flex items-center"
                     >
                       {l.label}
                     </Link>
                   </motion.div>
                 ))}
                 <Link
-                  href="#notify"
+                  href="/#notify"
                   onClick={() => setOpen(false)}
-                  className="mt-2 inline-block w-fit rounded-full border border-foreground/80 px-4 py-1.5 text-sm hover:bg-foreground hover:text-background"
+                  className="mt-3 mb-1 inline-flex w-fit items-center justify-center rounded-full border border-foreground/80 px-5 py-2.5 text-sm hover:bg-foreground hover:text-background"
                 >
                   Notify Me
                 </Link>

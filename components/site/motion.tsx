@@ -1,9 +1,26 @@
 "use client"
 
 import { motion, useReducedMotion, type Variants } from "framer-motion"
-import type { ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 
 export const easeOut = [0.22, 1, 0.36, 1] as const
+
+/**
+ * Gate heavy scroll-tied animations on small/low-end devices.
+ * Returns false when reduced-motion is preferred OR viewport < 640px.
+ */
+export function useShouldAnimate() {
+  const reduce = useReducedMotion()
+  const [wide, setWide] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)")
+    const handle = () => setWide(mq.matches)
+    handle()
+    mq.addEventListener("change", handle)
+    return () => mq.removeEventListener("change", handle)
+  }, [])
+  return wide && !reduce
+}
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },

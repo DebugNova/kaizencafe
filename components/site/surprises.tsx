@@ -9,7 +9,7 @@ const surprises = [
   {
     icon: Coffee,
     title: "A house drink",
-    teaser: "Named after a quiet street in Shillong. That’s all we’ll say.",
+    teaser: "Named after a quiet street in Guwahati. That’s all we’ll say.",
     when: "Reveal · Week 1",
   },
   {
@@ -39,29 +39,29 @@ export function Surprises() {
   return (
     <section
       id="surprises"
-      className="relative bg-foreground text-background py-20 sm:py-28 overflow-hidden"
+      className="relative bg-foreground text-background py-12 sm:py-16 overflow-hidden cv-auto"
     >
       {/* faint floating sparkles */}
       <span aria-hidden className="pointer-events-none absolute top-12 left-10 size-1 rounded-full bg-primary/70 drift-slow" />
       <span aria-hidden className="pointer-events-none absolute top-1/3 right-12 size-1.5 rounded-full bg-background/40 drift-slow" style={{ animationDelay: "1.4s" }} />
       <span aria-hidden className="pointer-events-none absolute bottom-20 left-1/4 size-1 rounded-full bg-primary/60 drift-slow" style={{ animationDelay: "2.8s" }} />
 
-      <div className="mx-auto max-w-6xl px-6 relative">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 relative">
         <div className="max-w-2xl">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.4em] text-background/60">
+            <p className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-background/60">
               Little Surprises
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
+            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
               Some things are better{" "}
               <motion.span
                 initial={{ opacity: 0, y: 6, rotate: -2 }}
                 whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="inline-block font-script text-primary text-5xl sm:text-6xl"
+                className="inline-block font-script text-primary text-4xl xs:text-5xl sm:text-6xl"
               >
                 unwrapped slowly
               </motion.span>
@@ -79,7 +79,7 @@ export function Surprises() {
 
         <Stagger
           gap={0.1}
-          className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-12 sm:mt-14 grid xs:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {surprises.map((s) => {
             const Icon = s.icon
@@ -165,13 +165,13 @@ export function Surprises() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@somewhere.cosy"
-                  className="flex-1 rounded-full bg-background/10 border border-background/20 px-5 py-3 text-sm text-background placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
+                  className="flex-1 min-w-0 rounded-full bg-background/10 border border-background/20 px-5 py-3 text-sm text-background placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors min-h-[44px]"
                 />
                 <motion.button
                   type="submit"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm tracking-wide hover:opacity-95 transition"
+                  className="rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm tracking-wide hover:opacity-95 transition min-h-[44px]"
                 >
                   Notify me
                 </motion.button>

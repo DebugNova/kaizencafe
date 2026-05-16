@@ -1,28 +1,31 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { Reveal, Stagger, Item } from "./motion"
+import { Reveal, Stagger, Item, useShouldAnimate } from "./motion"
 
 const values = [
   { kicker: "Hand", word: "crafted", note: "Every loaf, every pour." },
-  { kicker: "Locally", word: "sourced", note: "From Shillong farms & roasters." },
+  { kicker: "Locally", word: "sourced", note: "From Assam farms & roasters." },
   { kicker: "Always", word: "cozy", note: "Soft lights, slower mornings." },
   { kicker: "Quietly", word: "considered", note: "Small menu, big heart." },
 ]
 
 export function Story() {
   const ref = useRef<HTMLDivElement>(null)
+  const animate = useShouldAnimate()
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   })
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40])
+  const yRaw = useTransform(scrollYProgress, [0, 1], [40, -40])
+  const y = animate ? yRaw : 0
 
   return (
-    <section id="story" className="bg-background py-20 sm:py-28 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section id="story" className="bg-background py-12 sm:py-16 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 grid md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 items-center">
         <div ref={ref} className="relative">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -57,7 +60,7 @@ export function Story() {
             whileInView={{ opacity: 1, rotate: -6, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -bottom-6 -right-2 sm:-right-6 font-script text-primary text-5xl sm:text-6xl"
+            className="absolute -bottom-6 right-1 xs:right-2 sm:-right-6 font-script text-primary text-4xl xs:text-5xl sm:text-6xl"
           >
             come, sit awhile
           </motion.span>
@@ -70,7 +73,7 @@ export function Story() {
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
+            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
               Small things, done with{" "}
               <span className="font-script text-primary">great care</span>.
             </h2>
@@ -86,16 +89,16 @@ export function Story() {
             </Item>
             <Item>
               <p>
-                Born in the hills of Shillong, our cafe is a slow letter to the
-                people who love a long morning, a second cup, and a corner that
-                feels like home.
+                Born along the Brahmaputra in Guwahati, our cafe is a slow
+                letter to the people who love a long morning, a second cup, and
+                a corner that feels like home.
               </p>
             </Item>
             <Item>
               <p>
                 We&apos;re still tying the apron strings — but soon, you&apos;ll
-                find us between bookshops and pine trees, with the kettle on and
-                the music low.
+                find us tucked into a quiet lane in Garchuk, with the kettle on
+                and the music low.
               </p>
             </Item>
           </Stagger>
@@ -115,6 +118,15 @@ export function Story() {
               </Item>
             ))}
           </Stagger>
+
+          <Reveal delay={0.2}>
+            <Link
+              href="/story"
+              className="mt-10 inline-flex items-center gap-2 text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors link-underline"
+            >
+              Read the full story →
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>
