@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 
-// Target: ~45 days from now, locked once mounted on client.
 function getTarget() {
   const d = new Date()
   d.setDate(d.getDate() + 45)
@@ -18,6 +18,26 @@ function diff(target: number) {
   const minutes = Math.floor((ms / (1000 * 60)) % 60)
   const seconds = Math.floor((ms / 1000) % 60)
   return { days, hours, minutes, seconds }
+}
+
+function FlipNumber({ value, mounted }: { value: number; mounted: boolean }) {
+  const display = mounted ? String(value).padStart(2, "0") : "--"
+  return (
+    <div className="relative h-10 sm:h-12 w-full overflow-hidden">
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={display}
+          initial={{ y: "60%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-60%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex items-center justify-center font-serif text-3xl sm:text-4xl tabular-nums"
+        >
+          {display}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  )
 }
 
 export function Countdown() {
@@ -40,23 +60,28 @@ export function Countdown() {
   ]
 
   return (
-    <div
-      className="grid grid-cols-4 gap-3 sm:gap-6 max-w-md mx-auto"
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="grid grid-cols-4 gap-3 sm:gap-5 max-w-md mx-auto"
       aria-live="polite"
     >
-      {items.map((it) => (
-        <div
+      {items.map((it, i) => (
+        <motion.div
           key={it.label}
-          className="flex flex-col items-center rounded-md border border-border/70 bg-card/60 px-2 py-3 sm:py-4"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
+          className="group relative flex flex-col items-center rounded-md border border-border/70 bg-card/70 backdrop-blur px-2 py-3 sm:py-4 hover:border-primary/60 transition-colors"
         >
-          <span className="font-serif text-3xl sm:text-4xl tabular-nums text-foreground">
-            {mounted ? String(it.value).padStart(2, "0") : "--"}
-          </span>
+          <FlipNumber value={it.value} mounted={mounted} />
           <span className="mt-1 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground">
             {it.label}
           </span>
-        </div>
+          <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   )
 }

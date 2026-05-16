@@ -1,5 +1,9 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { Lock } from "lucide-react"
+import { Reveal } from "./motion"
 
 const items = [
   {
@@ -9,6 +13,7 @@ const items = [
     alt: "Two golden croissants on a teal-blue ribbed plate.",
     revealed: true,
     script: "taste us!",
+    tag: "Signature",
   },
   {
     name: "Matcha, our way",
@@ -17,6 +22,7 @@ const items = [
     alt: "A cup of bright green matcha latte beside a bamboo whisk.",
     revealed: true,
     script: "feel the greens",
+    tag: "House Special",
   },
   {
     name: "Wood-fired Pizza",
@@ -25,6 +31,7 @@ const items = [
     alt: "A wood-fired margherita pizza on a rustic wooden board.",
     revealed: true,
     script: "taste the crust",
+    tag: "Evenings",
   },
   {
     name: "The House Loaf",
@@ -50,29 +57,45 @@ export function PeekMenu() {
   return (
     <section
       id="peek"
-      className="relative bg-secondary/40 py-20 sm:py-28 border-y border-border/60"
+      className="relative bg-secondary/40 py-20 sm:py-28 border-y border-border/60 overflow-hidden"
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center max-w-2xl mx-auto">
-          <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
-            A little peek
-          </p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
-            What&apos;s on the chalkboard.
-          </h2>
-          <p className="mt-4 text-foreground/70 leading-relaxed">
-            A few favourites we can show you, and a few surprises we&apos;re
-            keeping under the cloche until opening day.
-          </p>
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+              A little peek
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="mt-4 font-serif text-4xl sm:text-5xl leading-tight text-balance">
+              What&apos;s on the{" "}
+              <span className="font-script text-primary">chalkboard</span>.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="mt-4 text-foreground/70 leading-relaxed">
+              A few favourites we can show you, and a few surprises we&apos;re
+              keeping under the cloche until opening day.
+            </p>
+          </Reveal>
         </div>
 
         <ul className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {items.map((it, i) => (
-            <li
+            <motion.li
               key={it.name}
-              className="group relative overflow-hidden rounded-sm bg-card border border-border/60"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.7,
+                delay: (i % 3) * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-sm bg-card border border-border/60 transition-shadow hover:shadow-[0_20px_40px_-20px_oklch(0.22_0.025_40/0.35)]"
             >
-              <div className="relative aspect-[4/5]">
+              <div className="relative aspect-[4/5] overflow-hidden">
                 {it.revealed && it.img ? (
                   <>
                     <Image
@@ -80,14 +103,20 @@ export function PeekMenu() {
                       alt={it.alt ?? it.name}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <span
                       aria-hidden
-                      className="absolute top-4 left-4 font-script text-primary text-3xl rotate-[-6deg] drop-shadow-sm"
+                      className="absolute top-4 left-4 font-script text-primary text-3xl rotate-[-6deg] drop-shadow-sm transition-transform duration-500 group-hover:-rotate-[10deg] group-hover:scale-110"
                     >
                       {it.script}
                     </span>
+                    {it.tag && (
+                      <span className="absolute top-4 right-4 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-[10px] uppercase tracking-[0.3em] border border-border/60">
+                        {it.tag}
+                      </span>
+                    )}
                   </>
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-muted/60 text-muted-foreground">
@@ -99,7 +128,14 @@ export function PeekMenu() {
                           "repeating-linear-gradient(45deg, transparent 0 10px, currentColor 10px 11px)",
                       }}
                     />
-                    <Lock className="size-6 relative" aria-hidden />
+                    <div aria-hidden className="absolute inset-0 shimmer" />
+                    <motion.div
+                      animate={{ rotate: [0, -6, 0, 6, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      className="relative"
+                    >
+                      <Lock className="size-7" aria-hidden />
+                    </motion.div>
                     <p className="relative mt-3 text-xs uppercase tracking-[0.3em]">
                       Coming soon
                     </p>
@@ -124,9 +160,15 @@ export function PeekMenu() {
                   {it.note}
                 </p>
               </div>
-            </li>
+            </motion.li>
           ))}
         </ul>
+
+        <Reveal delay={0.1}>
+          <p className="mt-12 text-center text-xs uppercase tracking-[0.35em] text-muted-foreground">
+            Full menu reveals on opening day · 3 of 6 unlocked
+          </p>
+        </Reveal>
       </div>
     </section>
   )

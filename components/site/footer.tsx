@@ -1,30 +1,54 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Instagram } from "lucide-react"
+import { Reveal } from "./motion"
 
 export function Footer() {
   return (
-    <footer className="bg-background border-t border-border/60">
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="flex flex-col items-center text-center gap-6">
-          <p className="font-script text-primary text-4xl rotate-[-2deg]">
-            see you soon, friend
-          </p>
-          <p className="font-serif text-3xl tracking-[0.2em]">KAIZEN</p>
-          <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
-            Shillong · Opening 2026
-          </p>
+    <footer className="relative bg-background border-t border-border/60 overflow-hidden">
+      {/* giant ghost wordmark */}
+      <div
+        aria-hidden
+        className="pointer-events-none select-none absolute inset-x-0 -bottom-10 sm:-bottom-16 text-center font-serif text-[22vw] leading-none tracking-[0.05em] text-foreground/[0.05]"
+      >
+        KAIZEN
+      </div>
 
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
-            aria-label="Kaizen on Instagram"
-          >
-            <Instagram className="size-4" aria-hidden />
-            @kaizen.shillong
-          </a>
+      <div className="mx-auto max-w-7xl px-6 py-20 relative">
+        <div className="flex flex-col items-center text-center gap-6">
+          <Reveal>
+            <p className="font-script text-primary text-4xl rotate-[-2deg]">
+              see you soon, friend
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="font-serif text-3xl tracking-[0.2em]">KAIZEN</p>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
+              Shillong · Opening 2026
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.22}>
+            <motion.a
+              href="#"
+              whileHover={{ y: -2 }}
+              className="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+              aria-label="Kaizen on Instagram"
+            >
+              <Instagram className="size-4" aria-hidden />
+              @kaizen.shillong
+            </motion.a>
+          </Reveal>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground border-t border-border/60 pt-6">
-          <p>© {new Date().getFullYear()} Kaizen Cafe. All small things, made with care.</p>
+        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground border-t border-border/60 pt-6">
+          <p>
+            © {new Date().getFullYear()} Kaizen Cafe. All small things, made
+            with care.
+          </p>
           <p className="italic">Crafted slowly, like a good loaf.</p>
         </div>
       </div>

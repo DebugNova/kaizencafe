@@ -5,19 +5,19 @@
 
 :root {
   /* Cozy cafe palette: cream, espresso, deep red, teal accent */
-  --background: oklch(0.962 0.025 85);          /* warm cream */
-  --foreground: oklch(0.22 0.025 40);           /* deep espresso */
+  --background: oklch(0.962 0.025 85);
+  --foreground: oklch(0.22 0.025 40);
   --card: oklch(0.978 0.018 85);
   --card-foreground: oklch(0.22 0.025 40);
   --popover: oklch(0.978 0.018 85);
   --popover-foreground: oklch(0.22 0.025 40);
-  --primary: oklch(0.42 0.17 25);               /* deep red script tone */
+  --primary: oklch(0.42 0.17 25);
   --primary-foreground: oklch(0.98 0.015 85);
   --secondary: oklch(0.92 0.03 80);
   --secondary-foreground: oklch(0.25 0.025 40);
   --muted: oklch(0.93 0.025 80);
   --muted-foreground: oklch(0.45 0.03 50);
-  --accent: oklch(0.55 0.06 195);               /* muted teal (from plate) */
+  --accent: oklch(0.55 0.06 195);
   --accent-foreground: oklch(0.98 0.015 85);
   --destructive: oklch(0.42 0.17 25);
   --destructive-foreground: oklch(0.98 0.015 85);
@@ -82,6 +82,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -108,8 +111,107 @@
   }
 }
 
+/* Drift (float gently) */
 @keyframes drift {
   0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
   50% { transform: translateY(-6px) rotate(var(--r, 0deg)); }
 }
 .drift { animation: drift 6s ease-in-out infinite; }
+
+/* Slow drift for backgrounds */
+@keyframes drift-slow {
+  0%, 100% { transform: translate(0, 0) rotate(var(--r, 0deg)); }
+  50% { transform: translate(0, -10px) rotate(var(--r, 0deg)); }
+}
+.drift-slow { animation: drift-slow 9s ease-in-out infinite; }
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+.marquee-track-fast {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+.marquee-pause:hover .marquee-track,
+.marquee-pause:hover .marquee-track-fast {
+  animation-play-state: paused;
+}
+
+/* Steam rising */
+@keyframes steam {
+  0% { transform: translateY(0) scaleX(1); opacity: 0; }
+  20% { opacity: 0.55; }
+  100% { transform: translateY(-32px) scaleX(1.4); opacity: 0; }
+}
+.steam {
+  animation: steam 3.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Twinkle (filament lights) */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 0 transparent); }
+  50% { opacity: 1; filter: drop-shadow(0 0 6px oklch(0.85 0.13 80)); }
+}
+.twinkle { animation: twinkle 2.6s ease-in-out infinite; }
+
+/* Soft pulse (X marks the spot) */
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.18); opacity: 0.35; }
+}
+.pulse-soft { animation: pulse-soft 2.4s ease-in-out infinite; }
+
+/* SVG path draw */
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+.draw-on-load {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: draw 2.4s ease-out 0.2s forwards;
+}
+
+/* Shimmer for locked tiles */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklch, var(--primary) 18%, transparent) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3.4s ease-in-out infinite;
+}
+
+/* Underline grow on hover for nav */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 350ms ease;
+}
+.link-underline:hover { background-size: 100% 1px; }
+
+/* Tilt on hover */
+.tilt { transition: transform 500ms cubic-bezier(.2,.8,.2,1); }
+.tilt:hover { transform: translateY(-4px) rotate(-0.4deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .drift, .drift-slow, .marquee-track, .marquee-track-fast,
+  .steam, .twinkle, .pulse-soft, .draw-on-load, .shimmer {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}

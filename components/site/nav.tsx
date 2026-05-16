@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const links = [
   { href: "#story", label: "Our Story" },
   { href: "#peek", label: "A Little Peek" },
+  { href: "#process", label: "How We Brew" },
   { href: "#surprises", label: "Surprises" },
   { href: "#visit", label: "Visit" },
 ]
@@ -16,11 +17,16 @@ export function Nav() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur">
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="#top" className="flex items-baseline gap-2">
-            <span className="font-serif text-2xl tracking-[0.18em] font-medium">
+          <Link href="#top" className="group flex items-baseline gap-2">
+            <span className="font-serif text-2xl tracking-[0.18em] font-medium transition-colors group-hover:text-primary">
               KAIZEN
             </span>
             <span className="hidden sm:inline text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -29,21 +35,33 @@ export function Nav() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            {links.map((l) => (
-              <Link
+            {links.map((l, i) => (
+              <motion.div
                 key={l.href}
-                href={l.href}
-                className="text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                initial={{ y: -8, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
               >
-                {l.label}
-              </Link>
+                <Link
+                  href={l.href}
+                  className="link-underline text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors"
+                >
+                  {l.label}
+                </Link>
+              </motion.div>
             ))}
-            <Link
-              href="#notify"
-              className="text-sm tracking-wide rounded-full border border-foreground/80 px-4 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+            <motion.div
+              initial={{ y: -8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              Notify Me
-            </Link>
+              <Link
+                href="#notify"
+                className="text-sm tracking-wide rounded-full border border-foreground/80 px-4 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+              >
+                Notify Me
+              </Link>
+            </motion.div>
           </nav>
 
           <button
@@ -52,37 +70,73 @@ export function Nav() {
             aria-label="Toggle menu"
             aria-expanded={open}
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            <AnimatePresence mode="wait" initial={false}>
+              {open ? (
+                <motion.span
+                  key="x"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="block"
+                >
+                  <X className="size-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="m"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="block"
+                >
+                  <Menu className="size-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         </div>
 
-        <div
-          className={cn(
-            "md:hidden overflow-hidden transition-[max-height] duration-300",
-            open ? "max-h-80" : "max-h-0",
-          )}
-        >
-          <nav className="flex flex-col gap-1 pb-4">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="py-2 text-sm tracking-wide text-foreground/80 hover:text-primary"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <Link
-              href="#notify"
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-block w-fit rounded-full border border-foreground/80 px-4 py-1.5 text-sm hover:bg-foreground hover:text-background"
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key="mobile"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden overflow-hidden"
             >
-              Notify Me
-            </Link>
-          </nav>
-        </div>
+              <nav className="flex flex-col gap-1 pb-4">
+                {links.map((l, i) => (
+                  <motion.div
+                    key={l.href}
+                    initial={{ x: -8, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="block py-2 text-sm tracking-wide text-foreground/80 hover:text-primary"
+                    >
+                      {l.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <Link
+                  href="#notify"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 inline-block w-fit rounded-full border border-foreground/80 px-4 py-1.5 text-sm hover:bg-foreground hover:text-background"
+                >
+                  Notify Me
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </header>
+    </motion.header>
   )
 }
