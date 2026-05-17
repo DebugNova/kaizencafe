@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { X } from "lucide-react"
 
 const messages = [
@@ -13,10 +13,29 @@ const messages = [
   "Be the first to know — join the list",
 ]
 
+const STORAGE_KEY = "kaizen-announcement-dismissed"
+
 export function AnnouncementBar() {
   const [open, setOpen] = useState(true)
   // Duplicated track for seamless marquee loop.
   const track = [...messages, ...messages]
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === "1") setOpen(false)
+    } catch {
+      // sessionStorage unavailable (private mode etc.) — leave bar visible
+    }
+  }, [])
+
+  const dismiss = () => {
+    setOpen(false)
+    try {
+      sessionStorage.setItem(STORAGE_KEY, "1")
+    } catch {
+      // ignore
+    }
+  }
 
   if (!open) return null
 
@@ -38,7 +57,7 @@ export function AnnouncementBar() {
       </div>
       <button
         type="button"
-        onClick={() => setOpen(false)}
+        onClick={dismiss}
         aria-label="Dismiss announcements"
         className="absolute right-0.5 top-1/2 -translate-y-1/2 inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10 active:scale-95 transition"
       >

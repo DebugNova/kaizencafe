@@ -17,12 +17,7 @@ export function Nav() {
   const [open, setOpen] = useState(false)
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70"
-    >
+    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="group inline-flex items-baseline gap-2 min-h-[44px] py-1">
@@ -35,33 +30,21 @@ export function Nav() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            {links.map((l, i) => (
-              <motion.div
-                key={l.href}
-                initial={{ y: -8, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
-              >
-                <Link
-                  href={l.href}
-                  className="link-underline text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors"
-                >
-                  {l.label}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ y: -8, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
+            {links.map((l) => (
               <Link
-                href="/#notify"
-                className="text-sm tracking-wide rounded-full border border-foreground/80 px-4 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                key={l.href}
+                href={l.href}
+                className="link-underline text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors"
               >
-                Notify Me
+                {l.label}
               </Link>
-            </motion.div>
+            ))}
+            <Link
+              href="/#notify"
+              className="text-sm tracking-wide rounded-full border border-foreground/80 px-4 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+            >
+              Notify Me
+            </Link>
           </nav>
 
           <button
@@ -137,6 +120,6 @@ export function Nav() {
           )}
         </AnimatePresence>
       </div>
-    </motion.header>
+    </header>
   )
 }

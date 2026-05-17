@@ -152,7 +152,7 @@ export function Surprises() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 max-w-xl rounded-sm border border-background/15 bg-background/[0.03] p-6 sm:p-8 backdrop-blur"
+          className="mt-16 max-w-xl scroll-mt-20 rounded-sm border border-background/15 bg-background/[0.03] p-6 sm:p-8 backdrop-blur"
         >
           <p className="font-script text-primary text-3xl">
             psst — be on the list
