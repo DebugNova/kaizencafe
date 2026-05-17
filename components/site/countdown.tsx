@@ -23,7 +23,7 @@ function diff(target: number) {
 function FlipNumber({ value, mounted }: { value: number; mounted: boolean }) {
   const display = mounted ? String(value).padStart(2, "0") : "--"
   return (
-    <div className="relative h-9 xs:h-10 sm:h-12 w-full overflow-hidden">
+    <div className="relative h-8 xs:h-10 sm:h-12 w-full overflow-hidden">
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={display}
@@ -31,7 +31,7 @@ function FlipNumber({ value, mounted }: { value: number; mounted: boolean }) {
           animate={{ y: "0%", opacity: 1 }}
           exit={{ y: "-60%", opacity: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 flex items-center justify-center font-serif text-2xl xs:text-3xl sm:text-4xl tabular-nums"
+          className="absolute inset-0 flex items-center justify-center font-serif text-xl xs:text-3xl sm:text-4xl tabular-nums"
         >
           {display}
         </motion.span>
@@ -64,7 +64,7 @@ export function Countdown() {
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="grid grid-cols-2 xs:grid-cols-4 gap-2.5 xs:gap-3 sm:gap-5 max-w-md mx-auto"
+      className="grid grid-cols-4 gap-1.5 xs:gap-3 sm:gap-5 max-w-md mx-auto"
       aria-live="polite"
     >
       {items.map((it, i) => (
@@ -73,10 +73,10 @@ export function Countdown() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
-          className="group relative flex flex-col items-center rounded-md border border-border/70 bg-card/70 backdrop-blur px-2 py-3 sm:py-4 hover:border-primary/60 transition-colors"
+          className="group relative flex flex-col items-center rounded-md border border-border/70 bg-card/70 backdrop-blur px-1 py-2.5 xs:px-2 xs:py-3 sm:py-4 hover:border-primary/60 transition-colors"
         >
           <FlipNumber value={it.value} mounted={mounted} />
-          <span className="mt-1 text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.2em] xs:tracking-[0.25em] text-muted-foreground">
+          <span className="mt-1 text-[8px] xs:text-[10px] sm:text-xs uppercase tracking-[0.08em] xs:tracking-[0.25em] text-muted-foreground">
             {it.label}
           </span>
           <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />

@@ -28,9 +28,9 @@ export function Hero() {
       <motion.span
         aria-hidden
         initial={{ opacity: 0, x: -20, rotate: -8 }}
-        animate={{ opacity: 0.7, x: 0, rotate: -8 }}
+        animate={{ opacity: 0.55, x: 0, rotate: -8 }}
         transition={{ duration: 1.1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute -top-2 left-3 xs:left-6 sm:left-12 lg:hidden font-script text-primary/70 text-4xl xs:text-5xl sm:text-7xl drift"
+        className="pointer-events-none absolute top-3 left-3 xs:left-6 sm:left-12 lg:hidden font-script text-primary/70 text-3xl xs:text-5xl sm:text-7xl drift"
         style={{ ["--r" as string]: "-8deg" }}
       >
         Opening
@@ -38,9 +38,9 @@ export function Hero() {
       <motion.span
         aria-hidden
         initial={{ opacity: 0, x: 20, rotate: 6 }}
-        animate={{ opacity: 0.7, x: 0, rotate: 6 }}
+        animate={{ opacity: 0.55, x: 0, rotate: 6 }}
         transition={{ duration: 1.1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute top-20 xs:top-24 right-3 xs:right-6 sm:right-16 lg:hidden font-script text-primary/70 text-4xl xs:text-5xl sm:text-7xl drift"
+        className="pointer-events-none absolute top-10 xs:top-24 right-3 xs:right-6 sm:right-16 lg:hidden font-script text-primary/70 text-3xl xs:text-5xl sm:text-7xl drift"
         style={{ ["--r" as string]: "6deg", animationDelay: "1.2s" }}
       >
         Soon
@@ -124,10 +124,8 @@ export function Hero() {
         </span>
       </motion.aside>
 
-      <motion.div
-        style={{ y, opacity }}
-        className="relative mx-auto max-w-5xl px-4 xs:px-6 pt-20 xs:pt-24 pb-6 sm:pt-32 sm:pb-8 lg:pt-10 text-center"
-      >
+      <div className="relative mx-auto max-w-5xl px-4 xs:px-6 pt-14 xs:pt-20 pb-6 sm:pt-32 sm:pb-8 lg:pt-10 text-center">
+        <motion.div style={animate ? { y, opacity } : undefined}>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 0.85, y: 0 }}
@@ -140,7 +138,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="text-xs uppercase tracking-[0.4em] text-muted-foreground mb-6"
+          className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-muted-foreground mb-5 xs:mb-6"
         >
           A cozy little cafe · est. 2026
         </motion.p>
@@ -149,7 +147,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-[22rem] sm:max-w-md md:max-w-lg"
+          className="relative mx-auto w-full max-w-[18rem] xs:max-w-[22rem] sm:max-w-md md:max-w-lg"
         >
           <StorefrontIllustration className="text-foreground/80 w-full h-auto" />
         </motion.div>
@@ -158,7 +156,7 @@ export function Hero() {
           initial={{ opacity: 0, letterSpacing: "0.04em", y: 12 }}
           animate={{ opacity: 1, letterSpacing: "0.08em", y: 0 }}
           transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 font-serif text-4xl xs:text-5xl sm:text-7xl md:text-8xl text-balance xs:tracking-[0.12em]"
+          className="mt-5 xs:mt-6 font-serif text-4xl xs:text-5xl sm:text-7xl md:text-8xl text-balance xs:tracking-[0.12em]"
         >
           KAIZEN
         </motion.h1>
@@ -166,7 +164,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-2 text-sm uppercase tracking-[0.5em] text-muted-foreground"
+          className="mt-2 text-xs xs:text-sm uppercase tracking-[0.3em] xs:tracking-[0.5em] text-muted-foreground"
         >
           Guwahati
         </motion.p>
@@ -175,7 +173,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55 }}
-          className="mt-8 mx-auto max-w-xl text-base sm:text-lg text-foreground/80 leading-relaxed text-balance"
+          className="mt-6 xs:mt-8 mx-auto max-w-xl text-base sm:text-lg text-foreground/80 leading-relaxed text-balance"
         >
           Feel the greens of <span className="font-serif italic">matcha</span>{" "}
           &amp; taste the crust of{" "}
@@ -190,22 +188,24 @@ export function Hero() {
           A slow-brewed corner for crisp croissants, warm conversations, and
           quiet mornings. Doors open soon.
         </motion.p>
+        </motion.div>
 
-        <div className="mt-12">
+        <div className="mt-8 xs:mt-10 sm:mt-12">
           <Countdown />
         </div>
 
+        <div>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1 }}
-          className="mt-10 flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center justify-center gap-3 xs:gap-4"
+          className="mt-8 xs:mt-10 flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center justify-center gap-3 xs:gap-4"
         >
           <motion.a
             href="#notify"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm tracking-wide text-primary-foreground shadow-[0_8px_30px_-12px_oklch(0.42_0.17_25/0.6)] hover:opacity-95 transition min-h-[44px]"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm tracking-wide text-primary-foreground shadow-[0_8px_30px_-12px_oklch(0.42_0.17_25/0.6)] hover:opacity-95 active:opacity-90 active:scale-[0.98] transition min-h-[44px]"
           >
             Be the first to know
           </motion.a>
@@ -213,7 +213,7 @@ export function Hero() {
             href="#peek"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center justify-center rounded-full border border-foreground/70 px-6 py-3 text-sm tracking-wide hover:bg-foreground hover:text-background transition min-h-[44px]"
+            className="inline-flex items-center justify-center rounded-full border border-foreground/70 px-6 py-3 text-sm tracking-wide hover:bg-foreground hover:text-background active:bg-foreground/90 active:scale-[0.98] transition min-h-[44px]"
           >
             A little peek
           </motion.a>
@@ -223,11 +223,12 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 1.2 }}
-          className="mt-12 text-[10px] xs:text-xs tracking-[0.2em] xs:tracking-[0.3em] uppercase text-muted-foreground text-balance px-2"
+          className="mt-10 xs:mt-12 text-[11px] xs:text-xs tracking-[0.2em] xs:tracking-[0.3em] uppercase text-muted-foreground text-balance px-2"
         >
           Royal Path · Near Royal Global University · Garchuk
         </motion.p>
-      </motion.div>
+        </div>
+      </div>
     </section>
   )
 }

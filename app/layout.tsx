@@ -25,7 +25,6 @@ export const metadata: Metadata = {
   title: 'Kaizen — Opening Soon in Guwahati',
   description:
     'A cozy little cafe coming soon to Guwahati. Feel the greens of matcha and taste the crust of pizza. Kaizen — Ligang Aloy, Royal Path, near Royal Global University, Betkuchi, Garchuk, Guwahati 781035.',
-  generator: 'v0.app',
   openGraph: {
     title: 'Kaizen — Opening Soon in Guwahati',
     description:

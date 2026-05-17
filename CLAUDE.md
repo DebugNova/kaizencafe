@@ -175,10 +175,36 @@ Node ≥ 20 is required for Next 16 / React 19. The repo uses pnpm — committin
 ## What this site is *not*
 
 - Not a storefront — no cart, no checkout, no payments.
-- Not a reservation system — the "notify me" forms are local-state only and
-  don't submit anywhere yet. See [`docs/roadmap.md`](./docs/roadmap.md).
+- Not a reservation system — the "notify me" forms add emails to a Resend
+  Audience via `/api/notify`. See [Email signup](#email-signup) below.
 - Not a CMS-driven site — copy is in the components on purpose.
 - Not multi-tenant or i18n — single brand, English copy.
+
+---
+
+## Email signup
+
+Both "notify me" forms (home `#notify` and `/events#notify-events`) POST to
+`app/api/notify/route.ts`, which adds the email to a single Resend Audience
+using the Node SDK (`resend.contacts.create`). The `source` field on the
+request is stored as `firstName` (`Opening` or `Events`) for later
+segmentation in the Resend dashboard.
+
+Required env vars (see `.env.example`):
+
+- `RESEND_API_KEY` — server-side, from resend.com dashboard.
+- `RESEND_AUDIENCE_ID` — the Audience UUID. Create one Audience for the
+  whole site; both forms feed it.
+
+If either is missing the route returns `503` and the form surfaces a friendly
+error — production deploy must have both set in Vercel project env vars.
+
+Local dev: copy `.env.example` to `.env.local` and fill in real values. The
+file is gitignored by the existing `.env*.local` rule.
+
+Launch day: log into Resend → Broadcasts → pick the audience → send. From
+address can be `onboarding@resend.dev` until the custom domain is added; for
+real deliverability, set up SPF/DKIM on the cafe's domain in Resend first.
 
 If you're tempted to add infrastructure for any of the above, check with the
 owner first.
@@ -192,5 +218,5 @@ owner first.
 - [`docs/components.md`](./docs/components.md) — section-by-section catalogue
 - [`docs/design-system.md`](./docs/design-system.md) — tokens, type, motion
 - [`docs/content.md`](./docs/content.md) — copy map and the brand voice
-- [`docs/deployment.md`](./docs/deployment.md) — Vercel + v0 workflow
+- [`docs/deployment.md`](./docs/deployment.md) — Vercel deployment + env vars
 - [`docs/roadmap.md`](./docs/roadmap.md) — what's next

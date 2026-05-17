@@ -35,6 +35,35 @@ const surprises = [
 export function Surprises() {
   const [submitted, setSubmitted] = useState(false)
   const [email, setEmail] = useState("")
+  const [pending, setPending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!email || pending) return
+    setPending(true)
+    setError(null)
+    try {
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "opening" }),
+      })
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean
+        error?: string
+      }
+      if (!res.ok || !data.ok) {
+        setError(data.error ?? "Couldn't sign you up. Try again.")
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError("Network hiccup. Try again in a moment.")
+    } finally {
+      setPending(false)
+    }
+  }
 
   return (
     <section
@@ -150,10 +179,7 @@ export function Surprises() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="mt-6 flex flex-col sm:flex-row gap-3"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  if (email) setSubmitted(true)
-                }}
+                onSubmit={handleSubmit}
               >
                 <label htmlFor="email" className="sr-only">
                   Email
@@ -162,25 +188,44 @@ export function Surprises() {
                   id="email"
                   type="email"
                   required
+                  autoComplete="email"
+                  inputMode="email"
+                  disabled={pending}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                    if (error) setError(null)
+                  }}
                   placeholder="you@somewhere.cosy"
-                  className="flex-1 min-w-0 rounded-full bg-background/10 border border-background/20 px-5 py-3 text-sm text-background placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors min-h-[44px]"
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "notify-error" : undefined}
+                  className="flex-1 min-w-0 rounded-full bg-background/10 border border-background/20 px-5 py-3 text-sm text-background placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors min-h-[44px] disabled:opacity-60"
                 />
                 <motion.button
                   type="submit"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm tracking-wide hover:opacity-95 transition min-h-[44px]"
+                  disabled={pending}
+                  whileHover={pending ? undefined : { y: -2 }}
+                  whileTap={pending ? undefined : { scale: 0.97 }}
+                  className="rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm tracking-wide hover:opacity-95 active:opacity-90 transition min-h-[44px] disabled:opacity-70 disabled:cursor-wait"
                 >
-                  Notify me
+                  {pending ? "Sending…" : "Notify me"}
                 </motion.button>
               </motion.form>
             )}
           </AnimatePresence>
 
+          {error && (
+            <p
+              id="notify-error"
+              role="alert"
+              className="mt-3 text-xs text-primary/90"
+            >
+              {error}
+            </p>
+          )}
+
           <p className="mt-4 text-xs uppercase tracking-[0.3em] text-background/45">
-            Joining 1,200+ slow morning enthusiasts
+            One quiet note when the doors open.
           </p>
         </motion.div>
       </div>

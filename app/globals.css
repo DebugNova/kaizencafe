@@ -94,6 +94,10 @@
     @apply bg-background text-foreground;
     overflow-x: clip;
   }
+  /* Anchor-target sections clear the sticky nav (~4rem) plus breathing room */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
 }
 
 @layer utilities {

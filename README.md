@@ -1,35 +1,29 @@
-# kaizencafe
+# Kaizen Cafe
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+The "coming soon" marketing site for **Kaizen**, a cafe opening on **6 June 2026** at Ligang Aloy, Royal Path, near Royal Global University, Garchuk, Guwahati.
 
-## Built with v0
+Built with [Next.js 16](https://nextjs.org), React 19, Tailwind CSS v4, shadcn/ui, and Framer Motion.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
-
-[Continue working on v0 →](https://v0.app/chat/projects/prj_AkVio98xtAxmAg8il71NVw8XJnaO)
-
-## Getting Started
-
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For deeper docs see [`CLAUDE.md`](./CLAUDE.md) (project orientation) and [`docs/`](./docs).
 
-## Learn More
+## Email signup
 
-To learn more, take a look at the following resources:
+The notify-me forms post to `/api/notify`, which adds the email to a [Resend](https://resend.com) Audience. Required env vars:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+- `RESEND_API_KEY`
+- `RESEND_AUDIENCE_ID`
 
-<a href="https://v0.app/chat/api/kiro/clone/DebugNova/kaizencafe" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+Copy `.env.example` to `.env.local` and fill in real values for local dev. See [`CLAUDE.md`](./CLAUDE.md#email-signup) for the full setup.
+
+## Deployment
+
+Production deploys via Vercel from the `main` branch. See [`docs/deployment.md`](./docs/deployment.md) for the full checklist.

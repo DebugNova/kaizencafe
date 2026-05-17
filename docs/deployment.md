@@ -9,20 +9,6 @@ A production build runs everywhere `pnpm build` runs, so any host with
 Node ≥ 20 and Next 16 support will work, but Vercel is the path of least
 resistance and `@vercel/analytics` is already wired in.
 
-## v0 workflow
-
-The repo was bootstrapped from a [v0.app](https://v0.app) project (see the
-top-level `README.md`). The v0 project URL is preserved there. Changes made
-inside v0 push commits back to this repo's `main` branch automatically; from
-there, Vercel deploys them.
-
-This means **two writers** are working on `main`:
-- humans pushing local commits
-- v0 pushing component scaffolds
-
-Keep `main` clean — small commits, descriptive messages — so it's easy to
-tell v0-generated changes apart from human ones.
-
 ## Build
 
 ```bash
@@ -36,12 +22,18 @@ pnpm start  # only if self-hosting
 
 ## Environment variables
 
-There are **none required** right now. The site is fully static at the
-section level.
+The notify-me forms need a Resend API key + Audience ID. Add both in
+Vercel → **Settings → Environment Variables** for Production, Preview,
+and Development:
 
-If you wire up the "Notify me" forms (see [`roadmap.md`](./roadmap.md)),
-follow Next's `NEXT_PUBLIC_*` convention for anything the browser needs
-to see, and keep secrets server-side only.
+- `RESEND_API_KEY` — server-side only (never `NEXT_PUBLIC_*`)
+- `RESEND_AUDIENCE_ID` — UUID of the Resend Audience
+
+Without these, `/api/notify` returns 503 and the form surfaces a friendly
+error to the user.
+
+For any future browser-visible config, follow Next's `NEXT_PUBLIC_*`
+convention and keep secrets server-side only.
 
 ## Analytics
 
@@ -74,11 +66,28 @@ Before merging to `main`:
 - [ ] New images live in `public/images/` (not imported from `app/`)
 - [ ] If you bumped a dep, `pnpm-lock.yaml` was committed
 - [ ] No `package-lock.json` or `yarn.lock` snuck in
+- [ ] `RESEND_API_KEY` and `RESEND_AUDIENCE_ID` are set in Vercel
 
 ## Post-deploy
 
-- Confirm the Vercel deployment URL renders correctly on mobile (the layout
+- Confirm the deployment URL renders correctly on mobile (the layout
   uses an `xs: 30rem` breakpoint specifically for narrow phones).
+- Submit a test email through `/#notify` and confirm it appears in the
+  Resend Audience. Delete it afterwards.
 - Check Vercel Analytics is recording pageviews on `/`, `/story`, `/events`.
 - If you changed the launch date, verify the live countdown matches
   expectations.
+
+## Renaming the project / changing the Vercel URL
+
+Vercel auto-generates `<project-name>.vercel.app` from the project name.
+To change it:
+
+1. Vercel dashboard → project → **Settings → General**.
+2. Change **Project Name** (e.g. `v0-kaizencafe` → `kaizencafe`).
+3. Save. The new URL `<new-name>.vercel.app` becomes the primary alias.
+   The old alias is freed for reuse by other projects.
+
+If the desired name is already taken Vercel-wide, pick a variant
+(e.g. `kaizen-guwahati.vercel.app`) or attach a custom domain via
+**Settings → Domains**.
