@@ -438,89 +438,253 @@ const values = [
     kicker: "Hand",
     word: "crafted",
     body: "Every loaf laminated by hand the night before. Every pour pulled by feel. The menu stays small so the care can stay big.",
+    aside: "the long way round",
   },
   {
     icon: Coffee,
     kicker: "Locally",
     word: "sourced",
     body: "Flour milled in Assam. Single-origin beans from roasters we visit. Dairy that travels short distances, in glass we can return.",
+    aside: "from nearby fields",
   },
   {
     icon: Heart,
     kicker: "Always",
     word: "cozy",
     body: "Soft lights. Slow mornings. A corner that always has a seat with your name on it — even on the busy days, especially then.",
+    aside: "soft on purpose",
   },
   {
     icon: Sparkles,
     kicker: "Quietly",
     word: "considered",
     body: "The playlist is curated. The chairs are tested for long conversations. The wifi is fast but the room invites you to put your phone face-down.",
+    aside: "in the details",
   },
 ]
+
+const romans = ["I", "II", "III", "IV"]
 
 function Values() {
   return (
     <section
       id="values"
-      className="bg-secondary/40 py-16 xs:py-20 sm:py-28 border-y border-border/60 cv-auto"
+      className="relative bg-secondary/40 py-20 xs:py-24 sm:py-32 border-y border-border/60 overflow-hidden cv-auto"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
+      {/* ambient warm wash + paper grain */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60 grain"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 size-[28rem] rounded-full bg-primary/[0.04] blur-3xl"
+      />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 relative">
+        {/* Centered editorial header (intentionally different shape from the Journey) */}
+        <div className="max-w-2xl mx-auto text-center">
           <Reveal>
-            <p className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-muted-foreground">
+            <p className="inline-flex items-center gap-3 text-[10px] xs:text-xs uppercase tracking-[0.4em] text-muted-foreground">
+              <span className="h-px w-8 bg-border" />
               What we promise
+              <span className="h-px w-8 bg-border" />
             </p>
           </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
-              Four small habits, kept{" "}
-              <span className="font-script text-primary">every day</span>.
+          <Reveal delay={0.1}>
+            <h2 className="mt-5 font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl leading-[1.05] text-balance">
+              Four small things,{" "}
+              <span className="font-script text-primary">sealed in</span>.
             </h2>
           </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-5 text-foreground/70 leading-relaxed max-w-xl">
-              These aren&apos;t taglines. They&apos;re what we&apos;ve been
-              practising since the very first test loaf — and what we hope
-              you&apos;ll feel the moment you walk in.
+          <Reveal delay={0.2}>
+            <p className="mt-5 text-foreground/70 leading-relaxed max-w-xl mx-auto">
+              Not taglines, not promises in a frame. These are the small,
+              stubborn habits we&apos;ve practised since the very first test
+              loaf — what we hope you feel the moment the door closes behind
+              you.
             </p>
+          </Reveal>
+          {/* hand-drawn flourish underneath */}
+          <Reveal delay={0.28}>
+            <svg
+              aria-hidden
+              viewBox="0 0 240 20"
+              className="mx-auto mt-8 h-4 w-40 text-primary/55"
+            >
+              <path
+                d="M4,12 Q60,2 120,12 T236,12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+              <circle cx="120" cy="12" r="2" fill="currentColor" />
+            </svg>
           </Reveal>
         </div>
 
+        {/* 2×2 grid of wax-sealed pledge cards */}
         <Stagger
-          gap={0.1}
-          className="mt-12 sm:mt-14 grid sm:grid-cols-2 gap-5 sm:gap-6"
+          gap={0.12}
+          className="mt-14 sm:mt-20 grid sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8"
         >
-          {values.map((v) => {
+          {values.map((v, i) => {
             const Icon = v.icon
+            const seal = `· a kaizen promise · est 2026 ·`
             return (
               <Item key={v.word}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 240, damping: 20 }}
-                  className="group relative h-full rounded-sm border border-border/60 bg-card/70 p-6 sm:p-8 backdrop-blur tilt"
-                >
-                  <span className="flex size-11 items-center justify-center rounded-full border border-border bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
-                  <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                    {v.kicker}
-                  </p>
-                  <p className="mt-1 font-serif text-3xl transition-colors group-hover:text-primary">
-                    {v.word}
-                  </p>
-                  <p className="mt-3 text-foreground/75 leading-relaxed">
-                    {v.body}
-                  </p>
+                <article className="group relative h-full rounded-sm border border-border/70 bg-card/85 backdrop-blur p-6 sm:p-8 md:p-10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_oklch(0.42_0.17_25/0.35)]">
+                  {/* tiny corner brackets — like a hand-cut card */}
                   <span
                     aria-hidden
-                    className="absolute inset-x-6 sm:inset-x-8 bottom-3 h-px scale-x-0 bg-primary/60 transition-transform duration-500 origin-left group-hover:scale-x-100"
+                    className="pointer-events-none absolute top-2.5 left-2.5 size-2 border-l border-t border-foreground/25"
                   />
-                </motion.div>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute top-2.5 right-2.5 size-2 border-r border-t border-foreground/25"
+                  />
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute bottom-2.5 left-2.5 size-2 border-l border-b border-foreground/25"
+                  />
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute bottom-2.5 right-2.5 size-2 border-r border-b border-foreground/25"
+                  />
+
+                  <div className="flex items-start justify-between gap-4">
+                    {/* Wax seal with rotating text along an arc */}
+                    <div className="relative size-24 sm:size-28 shrink-0 transition-transform duration-700 ease-out group-hover:rotate-[8deg]">
+                      <svg
+                        viewBox="0 0 140 140"
+                        className="absolute inset-0 size-full text-primary"
+                        aria-hidden
+                      >
+                        <defs>
+                          <path
+                            id={`seal-top-${i}`}
+                            d="M 22,70 A 48,48 0 0,1 118,70"
+                          />
+                        </defs>
+                        {/* outer dashed ring */}
+                        <circle
+                          cx="70"
+                          cy="70"
+                          r="65"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="0.5"
+                          strokeDasharray="1 2.5"
+                          opacity="0.45"
+                        />
+                        {/* middle thin ring */}
+                        <circle
+                          cx="70"
+                          cy="70"
+                          r="56"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="0.7"
+                          opacity="0.55"
+                        />
+                        {/* inner filled disc */}
+                        <circle
+                          cx="70"
+                          cy="70"
+                          r="40"
+                          fill="color-mix(in oklch, var(--primary) 9%, transparent)"
+                          stroke="currentColor"
+                          strokeWidth="0.9"
+                          opacity="0.7"
+                        />
+                        {/* rotating text along the top arc */}
+                        <text
+                          className="fill-current uppercase"
+                          style={{ fontSize: "7px", letterSpacing: "0.32em" }}
+                        >
+                          <textPath
+                            href={`#seal-top-${i}`}
+                            startOffset="50%"
+                            textAnchor="middle"
+                          >
+                            {seal}
+                          </textPath>
+                        </text>
+                        {/* pledge number stamped at the bottom */}
+                        <text
+                          x="70"
+                          y="120"
+                          textAnchor="middle"
+                          className="fill-current uppercase"
+                          style={{
+                            fontSize: "6.5px",
+                            letterSpacing: "0.4em",
+                          }}
+                        >
+                          · no. 0{i + 1} ·
+                        </text>
+                      </svg>
+                      {/* icon at the centre of the seal */}
+                      <div className="absolute inset-0 flex items-center justify-center -translate-y-1">
+                        <Icon
+                          className="size-5 sm:size-6 text-primary"
+                          aria-hidden
+                        />
+                      </div>
+                    </div>
+
+                    {/* Pledge index in the opposite corner */}
+                    <div className="text-right mt-1">
+                      <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
+                        Pledge
+                      </p>
+                      <p className="mt-1 font-serif text-3xl sm:text-4xl text-primary leading-none">
+                        {romans[i]}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pledge body */}
+                  <div className="mt-7 sm:mt-9">
+                    <p className="text-[11px] xs:text-xs uppercase tracking-[0.35em] text-muted-foreground">
+                      {v.kicker}
+                    </p>
+                    <p className="mt-1 font-serif text-4xl xs:text-5xl leading-[1] transition-colors duration-500 group-hover:text-primary">
+                      {v.word}
+                    </p>
+                    <p className="mt-4 text-foreground/75 leading-relaxed">
+                      {v.body}
+                    </p>
+                  </div>
+
+                  {/* Dashed footer with script aside */}
+                  <div className="mt-7 flex items-center gap-3 pt-5 border-t border-dashed border-border/70">
+                    <span
+                      aria-hidden
+                      className="size-1.5 rounded-full bg-primary"
+                    />
+                    <p className="font-script text-primary text-xl sm:text-2xl rotate-[-2deg]">
+                      {v.aside}
+                    </p>
+                  </div>
+                </article>
               </Item>
             )
           })}
         </Stagger>
+
+        {/* Hand-signed flourish, centred under the grid */}
+        <Reveal delay={0.15}>
+          <div className="mt-14 sm:mt-20 text-center">
+            <p className="font-script text-primary text-3xl xs:text-4xl sm:text-5xl rotate-[-2deg]">
+              — with care, the kaizen team
+            </p>
+            <p className="mt-3 text-[10px] xs:text-xs uppercase tracking-[0.35em] text-foreground/55">
+              sealed · garchuk · 6 june 2026
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

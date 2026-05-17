@@ -54,7 +54,83 @@ export function NoteCollage() {
           </h2>
         </Reveal>
 
-        <div className="relative mx-auto w-full max-w-4xl min-h-[24rem] xs:min-h-[26rem] sm:min-h-[28rem] px-2 xs:px-6 sm:px-16 md:px-24 lg:px-32">
+        {/* ─── MOBILE: scrapbook column (< sm) ─── */}
+        <div className="sm:hidden mx-auto w-full max-w-md flex flex-col items-stretch gap-5 xs:gap-6">
+          <motion.p
+            initial={{ opacity: 0, y: 12, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: -5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="self-start max-w-[15rem] origin-top-left font-script text-primary text-xl xs:text-2xl leading-snug drift-slow"
+          >
+            your favourite delicious croissant — here at Kaizen!
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            style={{ animationDelay: "1.2s" }}
+            className="self-end max-w-[15rem] origin-top-right text-right font-script text-primary text-xl xs:text-2xl leading-snug drift-slow whitespace-pre-line"
+          >
+            {"omg I know you've had croissants before…\nbut never quite like ours."}
+          </motion.p>
+
+          <div className="relative mx-auto my-2 w-full max-w-[14rem] xs:max-w-[16rem]">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-5 rounded-full border border-primary/20 drift-slow"
+              style={{ animationDelay: "0.6s" }}
+            />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-1.5 rounded-full border border-primary/10 drift-slow"
+              style={{ animationDelay: "2s" }}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.94 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative aspect-[4/5] overflow-hidden rounded-sm border border-border/60 shadow-md"
+            >
+              <Image
+                src="/images/croissant.jpg"
+                alt="Two golden, flaky croissants on a teal-blue ribbed plate."
+                fill
+                sizes="60vw"
+                loading="lazy"
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: -4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            style={{ animationDelay: "2.4s" }}
+            className="self-start max-w-[14rem] origin-bottom-left font-script text-primary text-xl xs:text-2xl leading-snug drift-slow whitespace-pre-line"
+          >
+            {"come taste us!\n(that sounds bad…)\ntaste our croissant!"}
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            style={{ animationDelay: "3.6s" }}
+            className="self-end max-w-[16rem] origin-bottom-right text-right font-script text-primary text-xl xs:text-2xl leading-snug drift-slow"
+          >
+            {'wait — was "croissant" once spelled "Prashant"?'}
+          </motion.p>
+        </div>
+
+        {/* ─── DESKTOP: scattered collage (sm and up) ─── */}
+        <div className="hidden sm:block relative mx-auto w-full max-w-4xl min-h-[28rem] px-16 md:px-24 lg:px-32">
           {notes.map((n, i) => (
             <motion.p
               key={i}
@@ -73,16 +149,16 @@ export function NoteCollage() {
             </motion.p>
           ))}
 
-          <div className="relative mx-auto w-full max-w-[11rem] xs:max-w-[14rem] sm:max-w-[16rem] md:max-w-[18rem]">
+          <div className="relative mx-auto w-full max-w-[16rem] md:max-w-[18rem]">
             {/* soft decorative ring behind image */}
             <span
               aria-hidden
-              className="pointer-events-none absolute -inset-6 sm:-inset-8 rounded-full border border-primary/20 drift-slow"
+              className="pointer-events-none absolute -inset-8 rounded-full border border-primary/20 drift-slow"
               style={{ animationDelay: "0.6s" }}
             />
             <span
               aria-hidden
-              className="pointer-events-none absolute -inset-2 sm:-inset-3 rounded-full border border-primary/10 drift-slow"
+              className="pointer-events-none absolute -inset-3 rounded-full border border-primary/10 drift-slow"
               style={{ animationDelay: "2s" }}
             />
 
