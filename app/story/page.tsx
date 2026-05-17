@@ -5,16 +5,37 @@ import { ScrollProgress } from "@/components/site/scroll-progress"
 import { Footer } from "@/components/site/footer"
 import { BackButton } from "@/components/site/back-button"
 import { StoryContent } from "@/components/site/story-content"
+import {
+  BreadcrumbJsonLd,
+  LocalBusinessJsonLd,
+} from "@/components/site/json-ld"
 
 export const metadata: Metadata = {
-  title: "Our Story — Kaizen Guwahati",
+  title: "Our Story",
   description:
-    "Kaizen means getting a little better, every day. The story behind a cozy little cafe on Royal Path, Garchuk — from a napkin sketch to opening day, 6 June 2026.",
+    "Kaizen means getting a little better, every day. The story behind a cozy cafe on Royal Path, Garchuk — a brunch-and-coffee spot near Royal Global University, Guwahati. Opening 6 June 2026.",
+  alternates: { canonical: "/story" },
   openGraph: {
-    title: "Our Story — Kaizen Guwahati",
-    description:
-      "A slow, deliberate beginning. The story behind Kaizen — a cozy cafe in Garchuk, Guwahati.",
     type: "website",
+    url: "https://kaizenguwahati.com/story",
+    title: "Our Story — Kaizen Cafe Guwahati",
+    description:
+      "A slow, deliberate beginning. The story behind Kaizen — a cozy cafe in Garchuk, near Royal Global University, Guwahati.",
+    images: [
+      {
+        url: "/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kaizen Cafe — Our Story",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Story — Kaizen Cafe Guwahati",
+    description:
+      "The story behind Kaizen — a cozy cafe in Garchuk, Guwahati. Opening 6 June 2026.",
+    images: ["/images/og-default.jpg"],
   },
 }
 
@@ -27,6 +48,13 @@ export default function StoryPage() {
       <BackButton />
       <StoryContent />
       <Footer />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Our Story", url: "/story" },
+        ]}
+      />
+      <LocalBusinessJsonLd />
     </main>
   )
 }

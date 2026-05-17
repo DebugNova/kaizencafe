@@ -98,6 +98,21 @@
   section[id] {
     scroll-margin-top: 5rem;
   }
+
+  /*
+   * Large-monitor scaling. Bumps root font-size in graduated steps so every
+   * rem-based size (Tailwind utilities, container max-widths, spacing, type)
+   * grows proportionally on big screens — preventing the "tiny content on a
+   * huge monitor" effect on 1440p / ultrawide / 4K displays.
+   *
+   * Safe by design: per CSS spec, `rem` inside @media queries always uses the
+   * initial 16px root size, never the computed value — so changing
+   * html font-size here does NOT shift any Tailwind breakpoint.
+   */
+  @media (min-width: 1920px) { html { font-size: 18px; } }
+  @media (min-width: 2400px) { html { font-size: 20px; } }
+  @media (min-width: 3000px) { html { font-size: 22px; } }
+  @media (min-width: 3840px) { html { font-size: 24px; } }
 }
 
 @layer utilities {

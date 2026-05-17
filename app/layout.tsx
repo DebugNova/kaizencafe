@@ -22,19 +22,77 @@ const caveat = Caveat({
 })
 
 export const metadata: Metadata = {
-  title: 'Kaizen — Opening Soon in Guwahati',
-  description:
-    'A cozy little cafe coming soon to Guwahati. Feel the greens of matcha and taste the crust of pizza. Kaizen — Ligang Aloy, Royal Path, near Royal Global University, Betkuchi, Garchuk, Guwahati 781035.',
-  openGraph: {
-    title: 'Kaizen — Opening Soon in Guwahati',
-    description:
-      'Feel the greens of matcha & taste the crust of pizza. A cozy cafe opening soon at Ligang Aloy, Royal Path, near Royal Global University, Garchuk, Guwahati.',
-    type: 'website',
+  metadataBase: new URL('https://kaizenguwahati.com'), // TODO: confirm prod URL
+  title: {
+    default: 'Kaizen — Cozy Cafe in Garchuk, Guwahati | Opening 6 June 2026',
+    template: '%s — Kaizen Cafe Guwahati',
   },
+  description:
+    'Kaizen is a cozy cafe opening 6 June 2026 at Ligang Aloy, Royal Path, near Royal Global University, Garchuk, Guwahati. Specialty coffee, matcha, pizza, live music nights.',
+  keywords: [
+    'cafe Guwahati',
+    'cafe Garchuk',
+    'cafe near Royal Global University',
+    'best cafe Guwahati',
+    'Kaizen Cafe',
+    'Kaizen Cafe Guwahati',
+    'coffee shop Guwahati',
+    'live music cafe Guwahati',
+    'open mic Guwahati',
+    'DJ cafe Guwahati',
+    'study cafe Guwahati',
+    'brunch Guwahati',
+    'cafe Betkuchi',
+    'Royal Path cafe',
+    'pizza cafe Guwahati',
+    'RGU cafe',
+  ],
+  authors: [{ name: 'Kaizen Cafe' }],
+  creator: 'Kaizen Cafe',
+  publisher: 'Kaizen Cafe',
+  formatDetection: { telephone: true, address: true, email: false },
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://kaizenguwahati.com',
+    siteName: 'Kaizen Cafe Guwahati',
+    title: 'Kaizen — Cozy Cafe in Garchuk, Guwahati | Opening 6 June 2026',
+    description:
+      'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026 near Royal Global University, Garchuk, Guwahati.',
+    images: [
+      {
+        url: '/images/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Kaizen Cafe — Guwahati',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Kaizen — Cozy Cafe in Garchuk, Guwahati',
+    description:
+      'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026, Garchuk, Guwahati.',
+    images: ['/images/og-default.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  category: 'food',
 }
 
 export const viewport = {
   themeColor: '#f3ecd9',
+  colorScheme: 'light',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
