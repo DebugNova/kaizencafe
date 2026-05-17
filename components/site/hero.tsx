@@ -185,8 +185,9 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="mt-3 mx-auto max-w-xl text-sm text-muted-foreground leading-relaxed text-pretty"
         >
-          A slow-brewed corner for crisp croissants, warm conversations, and
-          quiet mornings. Doors open soon.
+          A slow-brewed corner in Garchuk for crisp croissants, warm
+          conversations, and quiet mornings — a short walk from Royal Global
+          University. Doors open soon.
         </motion.p>
         </motion.div>
 
@@ -225,7 +226,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 1.2 }}
           className="mt-10 xs:mt-12 text-[11px] xs:text-xs tracking-[0.2em] xs:tracking-[0.3em] uppercase text-muted-foreground text-balance px-2"
         >
-          Royal Path · Near Royal Global University · Garchuk
+          A cafe on Royal Path · Near Royal Global University · Garchuk, Guwahati
         </motion.p>
         </div>
       </div>

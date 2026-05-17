@@ -280,7 +280,7 @@ export function Story() {
             data-gsap="headline"
             className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance"
           >
-            Small things, done with{" "}
+            A small cafe in Guwahati, done with{" "}
             <span className="font-script text-primary">great care</span>.
           </h2>
 

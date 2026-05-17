@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026 near Royal Global University, Garchuk, Guwahati.',
     images: [
       {
-        url: '/images/og-default.jpg',
+        url: '/images/cafe-interior.jpg',
         width: 1200,
         height: 630,
         alt: 'Kaizen Cafe — Guwahati',
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: 'Kaizen — Cozy Cafe in Garchuk, Guwahati',
     description:
       'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026, Garchuk, Guwahati.',
-    images: ['/images/og-default.jpg'],
+    images: ['/images/cafe-interior.jpg'],
   },
   robots: {
     index: true,
@@ -105,7 +105,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${inter.variable} ${fraunces.variable} ${caveat.variable} bg-background`}
     >
       <body className="font-sans antialiased">

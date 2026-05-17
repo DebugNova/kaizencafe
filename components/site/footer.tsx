@@ -21,7 +21,7 @@ export function Footer() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="text-[10px] xs:text-xs uppercase tracking-[0.25em] xs:tracking-[0.35em] text-muted-foreground text-balance">
-              Guwahati · Opening 6 June 2026
+              A cafe in Garchuk, Guwahati · Opening 6 June 2026
             </p>
           </Reveal>
 
@@ -31,7 +31,7 @@ export function Footer() {
               target="_blank"
               rel="noreferrer"
               whileHover={{ y: -2 }}
-              className="inline-flex items-center gap-2 px-3 py-2 -mx-3 -my-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-3 -mx-4 -my-3 min-h-[44px] text-sm text-foreground/80 hover:text-primary transition-colors"
               aria-label="Kaizen on Instagram"
             >
               <Instagram className="size-4" aria-hidden />

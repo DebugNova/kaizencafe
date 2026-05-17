@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Live music, DJ nights, open mics, and slow acoustic afternoons at Kaizen, Garchuk, Guwahati. Be the first to hear the lineup.",
     images: [
       {
-        url: "/images/og-default.jpg",
+        url: "/images/cafe-interior.jpg",
         width: 1200,
         height: 630,
         alt: "Kaizen Cafe — Events",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Live Music, DJ & Open Mics — Kaizen Cafe Guwahati",
     description:
       "Live music, DJ nights, open mics, slow acoustic afternoons at Kaizen, Garchuk, Guwahati.",
-    images: ["/images/og-default.jpg"],
+    images: ["/images/cafe-interior.jpg"],
   },
 }
 

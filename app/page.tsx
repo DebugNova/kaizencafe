@@ -2,7 +2,6 @@ import { AnnouncementBar } from "@/components/site/announcement-bar"
 import { Nav } from "@/components/site/nav"
 import { ScrollProgress } from "@/components/site/scroll-progress"
 import { Hero } from "@/components/site/hero"
-import { Story } from "@/components/site/story"
 import { PeekMenu } from "@/components/site/peek-menu"
 import { NoteCollage } from "@/components/site/note-collage"
 import { GalleryMarquee } from "@/components/site/gallery-marquee"
@@ -19,6 +18,7 @@ import {
   OpeningEventJsonLd,
   FaqJsonLd,
 } from "@/components/site/json-ld"
+import { Story } from "@/components/site/story-dynamic"
 
 const faqItems = [
   {

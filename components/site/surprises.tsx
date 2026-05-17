@@ -100,8 +100,9 @@ export function Surprises() {
           <Reveal delay={0.18}>
             <p className="mt-6 text-background/75 leading-relaxed">
               Between now and opening day, we&apos;ll be revealing little
-              surprises — recipes, corners of the cafe, and people who made it
-              real. Leave us your email and we&apos;ll let you in first.
+              surprises — recipes, corners of the cafe, and the quiet two-top
+              by the window we built for people who like to study or work slow
+              in Guwahati. Leave us your email and we&apos;ll let you in first.
             </p>
           </Reveal>
         </div>

@@ -61,9 +61,9 @@ export function Visit() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 text-foreground/75 leading-relaxed max-w-md">
-              Look for the cream awning and the smell of butter. We&apos;re
-              sitting on Royal Path in Garchuk, a short walk from Royal Global
-              University.
+              Look for the cream awning and the smell of butter. Kaizen is a
+              small cafe on Royal Path in Garchuk — a short walk from Royal
+              Global University (RGU), Guwahati.
             </p>
           </Reveal>
 
@@ -75,7 +75,7 @@ export function Visit() {
                   href={it.href}
                   target={it.external ? "_blank" : undefined}
                   rel={it.external ? "noreferrer" : undefined}
-                  className="link-underline transition-colors hover:text-primary"
+                  className="link-underline inline-flex items-center min-h-[44px] -my-2 transition-colors hover:text-primary"
                 >
                   {it.title}
                 </a>

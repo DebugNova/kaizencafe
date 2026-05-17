@@ -84,8 +84,9 @@ export function PeekMenu() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-4 text-foreground/70 leading-relaxed">
-              A few favourites we can show you, and a few surprises we&apos;re
-              keeping under the cloche until opening day.
+              Slow brunch, specialty coffee, and a few quiet favourites from
+              one of Guwahati&apos;s softest new cafes — kept under the cloche
+              until opening day.
             </p>
           </Reveal>
         </div>

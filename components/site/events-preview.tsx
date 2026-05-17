@@ -61,9 +61,9 @@ export function EventsPreview() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-5 text-foreground/70 leading-relaxed max-w-xl">
-              Live music, DJ nights, open mics — soon a part of our week. The
-              cafe stays late, the lights go warm, and the espresso machine
-              takes a bow.
+              Live music, DJ nights, and open mics in Guwahati — soon a part of
+              our week at Kaizen. The cafe stays late, the lights go warm, and
+              the espresso machine takes a bow.
             </p>
           </Reveal>
         </div>

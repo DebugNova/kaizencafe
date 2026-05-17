@@ -25,7 +25,7 @@ export function Nav() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="group flex items-baseline gap-2">
+          <Link href="/" className="group inline-flex items-baseline gap-2 min-h-[44px] py-1">
             <span className="font-serif text-2xl tracking-[0.18em] font-medium transition-colors group-hover:text-primary">
               KAIZEN
             </span>
