@@ -3,6 +3,7 @@ import { AnnouncementBar } from "@/components/site/announcement-bar"
 import { Nav } from "@/components/site/nav"
 import { ScrollProgress } from "@/components/site/scroll-progress"
 import { Footer } from "@/components/site/footer"
+import { BackButton } from "@/components/site/back-button"
 import { StoryContent } from "@/components/site/story-content"
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function StoryPage() {
       <ScrollProgress />
       <AnnouncementBar />
       <Nav />
+      <BackButton />
       <StoryContent />
       <Footer />
     </main>
