@@ -4,7 +4,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { Reveal, Stagger, Item, useShouldAnimate } from "./motion"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
+import { useGSAP } from "@gsap/react"
+import { useShouldAnimate } from "./motion"
+
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
 const values = [
   { kicker: "Hand", word: "crafted", note: "Every loaf, every pour." },
@@ -14,19 +20,216 @@ const values = [
 ]
 
 export function Story() {
-  const ref = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
   const animate = useShouldAnimate()
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: imageRef,
     offset: ["start end", "end start"],
   })
   const yRaw = useTransform(scrollYProgress, [0, 1], [40, -40])
   const y = animate ? yRaw : 0
 
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+
+      mm.add(
+        {
+          isWide: "(min-width: 640px)",
+          reduced: "(prefers-reduced-motion: reduce)",
+        },
+        (context) => {
+          const { isWide, reduced } = context.conditions as {
+            isWide: boolean
+            reduced: boolean
+          }
+          if (!isWide || reduced) return
+
+          const root = textRef.current
+          if (!root) return
+
+          const kicker = root.querySelector<HTMLElement>("[data-gsap='kicker']")
+          const headline = root.querySelector<HTMLElement>("[data-gsap='headline']")
+          const paragraphs = gsap.utils.toArray<HTMLElement>(
+            root.querySelectorAll("[data-gsap='paragraph']"),
+          )
+          const valueKickers = gsap.utils.toArray<HTMLElement>(
+            root.querySelectorAll("[data-gsap='value-kicker']"),
+          )
+          const valueWords = gsap.utils.toArray<HTMLElement>(
+            root.querySelectorAll("[data-gsap='value-word']"),
+          )
+          const valueNotes = gsap.utils.toArray<HTMLElement>(
+            root.querySelectorAll("[data-gsap='value-note']"),
+          )
+          const cta = root.querySelector<HTMLElement>("[data-gsap='cta']")
+
+          const splits: SplitText[] = []
+          const make = (
+            target: Element | null,
+            opts: Parameters<typeof SplitText.create>[1],
+          ) => {
+            if (!target) return null
+            const s = SplitText.create(target, opts)
+            splits.push(s)
+            return s
+          }
+
+          const kickerSplit = make(kicker, { type: "chars", mask: "chars" })
+
+          const headlineSplit = make(headline, {
+            type: "lines,words,chars",
+            mask: "lines",
+            linesClass: "split-line overflow-hidden",
+            wordsClass: "split-word inline-block will-change-transform",
+          })
+
+          const paragraphSplits = paragraphs
+            .map((p) =>
+              make(p, {
+                type: "lines",
+                mask: "lines",
+                linesClass: "split-line overflow-hidden",
+              }),
+            )
+            .filter(Boolean) as SplitText[]
+
+          const valueWordSplits = valueWords
+            .map((w) =>
+              make(w, {
+                type: "chars",
+                mask: "chars",
+                charsClass: "split-char inline-block will-change-transform",
+              }),
+            )
+            .filter(Boolean) as SplitText[]
+
+          const ctaSplit = make(cta, {
+            type: "chars,words",
+            mask: "words",
+            wordsClass: "split-word inline-block will-change-transform",
+          })
+
+          const tl = gsap.timeline({
+            defaults: { ease: "expo.out" },
+            scrollTrigger: {
+              trigger: root,
+              start: "top 72%",
+              once: true,
+            },
+          })
+
+          if (kickerSplit) {
+            tl.from(kickerSplit.chars, {
+              yPercent: 110,
+              opacity: 0,
+              duration: 0.45,
+              ease: "power3.out",
+              stagger: { each: 0.012, from: "start" },
+            })
+          }
+
+          if (headlineSplit) {
+            tl.from(
+              headlineSplit.words,
+              {
+                yPercent: 118,
+                rotate: 4,
+                opacity: 0,
+                duration: 0.65,
+                stagger: { each: 0.035, from: "start" },
+                ease: "expo.out",
+              },
+              "-=0.3",
+            )
+          }
+
+          paragraphSplits.forEach((s, i) => {
+            tl.from(
+              s.lines,
+              {
+                yPercent: 100,
+                opacity: 0,
+                duration: 0.55,
+                stagger: 0.035,
+                ease: "power3.out",
+              },
+              i === 0 ? "-=0.4" : "-=0.5",
+            )
+          })
+
+          if (valueKickers.length) {
+            tl.from(
+              valueKickers,
+              {
+                opacity: 0,
+                y: 12,
+                duration: 0.35,
+                stagger: 0.04,
+                ease: "power3.out",
+              },
+              "-=0.35",
+            )
+          }
+
+          valueWordSplits.forEach((s, i) => {
+            tl.from(
+              s.chars,
+              {
+                yPercent: 110,
+                opacity: 0,
+                duration: 0.4,
+                stagger: 0.012,
+                ease: "expo.out",
+              },
+              i === 0 ? "-=0.25" : "-=0.38",
+            )
+          })
+
+          if (valueNotes.length) {
+            tl.from(
+              valueNotes,
+              {
+                opacity: 0,
+                y: 8,
+                duration: 0.35,
+                stagger: 0.04,
+                ease: "power2.out",
+              },
+              "-=0.35",
+            )
+          }
+
+          if (ctaSplit) {
+            tl.from(
+              ctaSplit.chars,
+              {
+                yPercent: 100,
+                opacity: 0,
+                duration: 0.4,
+                stagger: 0.01,
+                ease: "power3.out",
+              },
+              "-=0.25",
+            )
+          }
+
+          return () => {
+            splits.forEach((s) => s.revert())
+          }
+        },
+      )
+
+      return () => mm.revert()
+    },
+    { scope: textRef },
+  )
+
   return (
     <section id="story" className="bg-background py-12 sm:py-16 overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 grid md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 items-center">
-        <div ref={ref} className="relative">
+        <div ref={imageRef} className="relative">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -43,7 +246,6 @@ export function Story() {
                 className="object-cover"
               />
             </motion.div>
-            {/* badge */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -66,67 +268,72 @@ export function Story() {
           </motion.span>
         </div>
 
-        <div>
-          <Reveal>
-            <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
-              Our Story
+        <div ref={textRef}>
+          <p
+            data-gsap="kicker"
+            className="text-xs uppercase tracking-[0.4em] text-muted-foreground"
+          >
+            Our Story
+          </p>
+
+          <h2
+            data-gsap="headline"
+            className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance"
+          >
+            Small things, done with{" "}
+            <span className="font-script text-primary">great care</span>.
+          </h2>
+
+          <div className="mt-6 space-y-5 text-foreground/80 leading-relaxed">
+            <p data-gsap="paragraph">
+              <span className="font-serif italic">Kaizen</span> — a quiet
+              Japanese word for getting a little better, every day. It&apos;s
+              the way we knead our dough, foam our milk, and set our tables.
             </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
-              Small things, done with{" "}
-              <span className="font-script text-primary">great care</span>.
-            </h2>
-          </Reveal>
+            <p data-gsap="paragraph">
+              Born along the Brahmaputra in Guwahati, our cafe is a slow
+              letter to the people who love a long morning, a second cup, and
+              a corner that feels like home.
+            </p>
+            <p data-gsap="paragraph">
+              We&apos;re still tying the apron strings — but soon, you&apos;ll
+              find us tucked into a quiet lane in Garchuk, with the kettle on
+              and the music low.
+            </p>
+          </div>
 
-          <Stagger className="mt-6 space-y-5 text-foreground/80 leading-relaxed" gap={0.1}>
-            <Item>
-              <p>
-                <span className="font-serif italic">Kaizen</span> — a quiet
-                Japanese word for getting a little better, every day. It&apos;s
-                the way we knead our dough, foam our milk, and set our tables.
-              </p>
-            </Item>
-            <Item>
-              <p>
-                Born along the Brahmaputra in Guwahati, our cafe is a slow
-                letter to the people who love a long morning, a second cup, and
-                a corner that feels like home.
-              </p>
-            </Item>
-            <Item>
-              <p>
-                We&apos;re still tying the apron strings — but soon, you&apos;ll
-                find us tucked into a quiet lane in Garchuk, with the kettle on
-                and the music low.
-              </p>
-            </Item>
-          </Stagger>
-
-          <Stagger className="mt-10 grid grid-cols-2 gap-6 border-t border-border/60 pt-8" gap={0.08}>
+          <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-border/60 pt-8">
             {values.map((v) => (
-              <Item key={v.word}>
-                <div className="group">
-                  <dt className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                    {v.kicker}
-                  </dt>
-                  <dd className="mt-1 font-serif text-2xl transition-colors group-hover:text-primary">
-                    {v.word}
-                  </dd>
-                  <p className="mt-1 text-sm text-muted-foreground">{v.note}</p>
-                </div>
-              </Item>
+              <div key={v.word} className="group">
+                <dt
+                  data-gsap="value-kicker"
+                  className="text-xs uppercase tracking-[0.25em] text-muted-foreground"
+                >
+                  {v.kicker}
+                </dt>
+                <dd
+                  data-gsap="value-word"
+                  className="mt-1 font-serif text-2xl transition-colors group-hover:text-primary"
+                >
+                  {v.word}
+                </dd>
+                <p
+                  data-gsap="value-note"
+                  className="mt-1 text-sm text-muted-foreground"
+                >
+                  {v.note}
+                </p>
+              </div>
             ))}
-          </Stagger>
+          </dl>
 
-          <Reveal delay={0.2}>
-            <Link
-              href="/story"
-              className="mt-10 inline-flex items-center gap-2 text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors link-underline"
-            >
-              Read the full story →
-            </Link>
-          </Reveal>
+          <Link
+            href="/story"
+            data-gsap="cta"
+            className="mt-10 inline-flex items-center gap-2 text-sm tracking-wide text-foreground/80 hover:text-primary transition-colors link-underline"
+          >
+            Read the full story →
+          </Link>
         </div>
       </div>
     </section>

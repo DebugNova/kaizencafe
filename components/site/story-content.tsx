@@ -11,6 +11,8 @@ import {
   Sparkles,
   MapPin,
   CalendarClock,
+  Pencil,
+  DoorOpen,
 } from "lucide-react"
 import { Reveal, Stagger, Item, useShouldAnimate } from "./motion"
 
@@ -229,105 +231,180 @@ function TheName() {
 
 const milestones = [
   {
+    chapter: "01",
     year: "2024",
     label: "A first sketch",
     body: "On a paper napkin in a borrowed corner of someone else's cafe — the shape of a small espresso bar, a wood-fired oven, and a window seat for two.",
+    icon: Pencil,
+    aside: "where it began",
   },
   {
+    chapter: "02",
     year: "Early 2025",
     label: "The corner found",
     body: "A long walk through Garchuk ended at Ligang Aloy on Royal Path, with cream-coloured walls and the right kind of afternoon light.",
+    icon: MapPin,
+    aside: "the right room",
   },
   {
+    chapter: "03",
     year: "Late 2025",
     label: "Kneading begins",
     body: "Hundreds of test loaves. A laminator we named. Two roasters chosen, three flours rejected. A milk that finally foamed the right way.",
+    icon: Wheat,
+    aside: "first folds",
   },
   {
+    chapter: "04",
     year: "Early 2026",
     label: "The espresso bar arrives",
     body: "A lever machine settles into its corner. The wood is sealed. The pendant lights find their height. The menu finds its small, final shape.",
+    icon: Coffee,
+    aside: "first pour",
   },
   {
+    chapter: "05",
     year: "May 2026",
     label: "Soft-launch nights",
     body: "Friends, family, neighbours — quiet evenings to learn the room. Notebooks at every table. Croissants, second drafts, gentle corrections.",
+    icon: Sparkles,
+    aside: "trial runs",
   },
   {
+    chapter: "06",
     year: "6 June 2026",
     label: "Doors open",
     body: "Mornings begin at eight. The kettle is on. The seat by the window is, as ever, saved for you.",
+    icon: DoorOpen,
+    aside: "come in",
   },
 ]
 
 function TheJourney() {
   return (
-    <section className="bg-background py-16 xs:py-20 sm:py-28 cv-auto">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <Reveal>
-            <p className="text-[10px] xs:text-xs uppercase tracking-[0.3em] xs:tracking-[0.4em] text-muted-foreground">
-              How we got here
-            </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="mt-4 font-serif text-3xl xs:text-4xl sm:text-5xl leading-tight text-balance">
-              A slow, deliberate{" "}
-              <span className="font-script text-primary">beginning</span>.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-5 text-foreground/70 leading-relaxed max-w-xl">
-              Kaizen didn&apos;t arrive overnight — it&apos;s been quietly
-              becoming itself, season by season. A short version, told in
-              milestones.
-            </p>
-          </Reveal>
+    <section className="relative bg-background py-20 xs:py-24 sm:py-32 overflow-hidden cv-auto">
+      {/* faint coffee-ring ornaments */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-24 right-2 sm:right-12 size-32 sm:size-44 rounded-full border border-primary/15 drift-slow"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute top-28 right-6 sm:right-16 size-24 sm:size-32 rounded-full border border-primary/20"
+        style={{ animationDelay: "1.2s" }}
+      />
+      {/* watermark script in the bottom corner */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-2 -left-4 font-script text-[8rem] sm:text-[12rem] md:text-[16rem] leading-none text-primary/[0.05] select-none"
+      >
+        kaizen
+      </span>
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 relative">
+        {/* Editorial header */}
+        <div className="grid md:grid-cols-12 gap-6 md:gap-10 md:items-end">
+          <div className="md:col-span-7">
+            <Reveal>
+              <p className="inline-flex items-center gap-3 text-[10px] xs:text-xs uppercase tracking-[0.4em] text-muted-foreground">
+                <span className="size-1.5 rounded-full bg-primary" />
+                How we got here
+                <span className="hidden xs:inline-block h-px w-12 bg-border" />
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mt-5 font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl leading-[1.05] text-balance">
+                A slow read, in{" "}
+                <span className="font-script text-primary">six chapters</span>.
+              </h2>
+            </Reveal>
+          </div>
+          <div className="md:col-span-5">
+            <Reveal delay={0.2}>
+              <p className="text-foreground/70 leading-relaxed">
+                Kaizen didn&apos;t arrive overnight — it has been quietly
+                becoming itself, season by season. The short version, told in
+                moments worth keeping.
+              </p>
+            </Reveal>
+            <Reveal delay={0.28}>
+              <p className="mt-5 inline-flex items-center gap-3 text-[10px] xs:text-xs uppercase tracking-[0.3em] text-foreground/55">
+                <span className="h-px w-8 bg-foreground/30" />
+                six dispatches · 2024 → 2026
+              </p>
+            </Reveal>
+          </div>
         </div>
 
-        <div className="relative mt-12 sm:mt-14">
-          {/* vertical timeline rail */}
-          <motion.div
+        {/* Chapter reel */}
+        <div className="relative mt-14 sm:mt-20">
+          {/* dotted vertical rail */}
+          <motion.span
             aria-hidden
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformOrigin: "top" }}
-            className="absolute left-3 md:left-1/2 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-border to-transparent md:-translate-x-1/2"
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              transformOrigin: "top",
+              backgroundImage:
+                "linear-gradient(to bottom, color-mix(in oklch, var(--primary) 55%, transparent) 50%, transparent 50%)",
+              backgroundSize: "1px 8px",
+              backgroundRepeat: "repeat-y",
+            }}
+            className="pointer-events-none absolute left-4 sm:left-6 top-3 bottom-3 w-px"
           />
 
-          <Stagger gap={0.1} className="space-y-8 sm:space-y-10 md:space-y-14">
-            {milestones.map((m, i) => {
-              const onLeft = i % 2 === 0
+          <Stagger gap={0.12} className="space-y-14 sm:space-y-20">
+            {milestones.map((m) => {
+              const Icon = m.icon
               return (
-                <Item key={m.year}>
-                  <div
-                    className={`relative pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-12 md:items-start ${
-                      onLeft ? "" : "md:[&>*:first-child]:order-2"
-                    }`}
-                  >
-                    {/* node dot */}
+                <Item key={m.chapter}>
+                  <div className="group relative pl-12 sm:pl-16">
+                    {/* node on rail */}
                     <span
                       aria-hidden
-                      className="absolute left-2.5 top-2 md:left-1/2 md:-translate-x-1/2 size-2.5 rounded-full bg-primary ring-4 ring-background"
+                      className="absolute left-4 sm:left-6 -translate-x-1/2 top-3 size-2.5 rounded-full bg-primary ring-4 ring-background"
+                    />
+                    {/* short tick from rail toward content */}
+                    <span
+                      aria-hidden
+                      className="absolute left-4 sm:left-6 top-[15px] h-px w-6 sm:w-8 bg-primary/35"
                     />
 
-                    <div
-                      className={`${
-                        onLeft ? "md:text-right md:pr-6" : "md:pl-6"
-                      }`}
-                    >
-                      <p className="text-[10px] xs:text-xs uppercase tracking-[0.25em] xs:tracking-[0.3em] text-muted-foreground">
-                        {m.year}
-                      </p>
-                      <h3 className="mt-1 font-serif text-xl xs:text-2xl">{m.label}</h3>
-                    </div>
+                    <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start">
+                      {/* LEFT — kraft year tag + outlined chapter numeral */}
+                      <div className="md:col-span-3">
+                        <p className="inline-flex items-center gap-2 rounded-sm border border-border bg-card/70 px-2.5 py-1 text-[10px] uppercase tracking-[0.3em] text-foreground/70 rotate-[-2deg] shadow-sm">
+                          <CalendarClock className="size-3 text-primary" />
+                          {m.year}
+                        </p>
+                        <span
+                          aria-hidden
+                          className="mt-4 block font-serif italic text-7xl xs:text-8xl sm:text-9xl leading-none text-transparent select-none transition-colors duration-500 group-hover:text-primary"
+                          style={{ WebkitTextStroke: "1px var(--primary)" }}
+                        >
+                          {m.chapter}
+                        </span>
+                      </div>
 
-                    <div className={`${onLeft ? "md:pl-6" : "md:pr-6"}`}>
-                      <p className="mt-2 md:mt-0 text-sm xs:text-base text-foreground/75 leading-relaxed">
-                        {m.body}
-                      </p>
+                      {/* RIGHT — icon medallion + script aside + label + body */}
+                      <div className="md:col-span-9">
+                        <div className="flex items-center gap-3">
+                          <span className="flex size-10 sm:size-11 items-center justify-center rounded-full border border-primary/30 bg-background text-primary transition-colors duration-500 group-hover:bg-primary group-hover:text-primary-foreground">
+                            <Icon className="size-4 sm:size-5" aria-hidden />
+                          </span>
+                          <p className="font-script text-primary text-2xl sm:text-3xl rotate-[-3deg]">
+                            {m.aside}
+                          </p>
+                        </div>
+                        <h3 className="mt-4 font-serif text-2xl xs:text-3xl sm:text-4xl leading-snug text-balance">
+                          {m.label}
+                        </h3>
+                        <p className="mt-3 text-foreground/75 leading-relaxed max-w-xl">
+                          {m.body}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </Item>
@@ -335,6 +412,19 @@ function TheJourney() {
             })}
           </Stagger>
         </div>
+
+        {/* Tail flourish */}
+        <Reveal delay={0.1}>
+          <div className="relative mt-14 sm:mt-20 pl-12 sm:pl-16">
+            <span
+              aria-hidden
+              className="absolute left-4 sm:left-6 -translate-x-1/2 top-4 size-2 rounded-full bg-primary/40 ring-4 ring-background"
+            />
+            <p className="font-script text-primary text-3xl xs:text-4xl rotate-[-2deg]">
+              ...the next chapter, you write with us.
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
