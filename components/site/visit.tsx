@@ -108,11 +108,11 @@ export function Visit() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-sm border border-border/60 bg-card/60 p-4 xs:p-6 sm:p-10 grain"
+          className="relative rounded-sm border border-border/60 bg-card/60 p-2 xs:p-6 sm:p-10 grain"
         >
           <svg
             viewBox="0 0 400 460"
-            className="w-full h-auto text-foreground/70"
+            className="w-full h-auto text-foreground/70 overflow-visible"
             fill="none"
             stroke="currentColor"
             strokeWidth="1"
@@ -323,11 +323,11 @@ export function Visit() {
 
             {/* Neighbourhood POIs (small dot + label) */}
             {[
-              { x: 150, y: 110, label: "CBI ACB", dy: -6, delay: 1.35 },
-              { x: 248, y: 132, label: "Good Life Medicos", dy: -6, delay: 1.4, accent: true },
-              { x: 96, y: 168, label: "Ather Charging", dy: 10, delay: 1.45 },
-              { x: 322, y: 102, label: "Universal Ecogreens", dy: -6, delay: 1.5 },
-              { x: 152, y: 410, label: "Kurls & Spykes", dy: -6, delay: 1.55 },
+              { x: 150, y: 110, label: "CBI ACB", dy: -8, delay: 1.35 },
+              { x: 248, y: 132, label: "Good Life Medicos", dy: -8, delay: 1.4, accent: true },
+              { x: 96, y: 168, label: "Ather Charging", dy: 12, delay: 1.45 },
+              { x: 322, y: 102, label: "Universal Ecogreens", dy: -8, delay: 1.5 },
+              { x: 152, y: 410, label: "Kurls & Spykes", dy: -8, delay: 1.55 },
             ].map((p, i) => (
               <motion.g
                 key={i}
@@ -339,7 +339,7 @@ export function Visit() {
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r="1.6"
+                  r="1.8"
                   fill="currentColor"
                   stroke="none"
                   className={p.accent ? "text-primary" : undefined}
@@ -348,10 +348,10 @@ export function Visit() {
                   x={p.x}
                   y={p.y + p.dy}
                   textAnchor="middle"
-                  fontSize="7"
+                  fontSize="9"
                   fill="currentColor"
                   stroke="none"
-                  opacity={p.accent ? 0.9 : 0.65}
+                  opacity={p.accent ? 0.95 : 0.75}
                   className={p.accent ? "text-primary" : undefined}
                 >
                   {p.label}
