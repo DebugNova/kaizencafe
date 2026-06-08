@@ -23,9 +23,9 @@ export const metadata: Metadata = {
       "A slow, deliberate beginning. The story behind Kaizen — a cozy cafe in Garchuk, near Royal Global University, Guwahati.",
     images: [
       {
-        url: "/images/cafe-interior.jpg",
-        width: 1200,
-        height: 630,
+        url: "/images/bakery-counter.jpg",
+        width: 477,
+        height: 803,
         alt: "Kaizen Cafe — Our Story",
       },
     ],
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Our Story — Kaizen Cafe Guwahati",
     description:
       "The story behind Kaizen — a cozy cafe in Garchuk, Guwahati. Opening 6 June 2026.",
-    images: ["/images/cafe-interior.jpg"],
+    images: ["/images/bakery-counter.jpg"],
   },
 }
 

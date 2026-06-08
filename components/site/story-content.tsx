@@ -104,12 +104,12 @@ function StoryHero() {
               className="absolute inset-0 -top-10 -bottom-10"
             >
               <Image
-                src="/images/cafe-interior.jpg"
-                alt="A glimpse inside Kaizen — warm wood tables, soft pendant lights, and a small espresso bar."
+                src="/images/espresso-cake.jpg"
+                alt="A glass of espresso beside a slice of cake and fresh flowers inside Kaizen."
                 fill
                 sizes="(min-width: 768px) 40vw, 90vw"
                 priority
-                className="object-cover"
+                className="object-cover object-center"
               />
             </motion.div>
             <motion.div

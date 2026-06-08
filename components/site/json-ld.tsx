@@ -9,7 +9,11 @@ export function LocalBusinessJsonLd() {
     '@type': 'CafeOrCoffeeShop',
     '@id': `${SITE_URL}#cafe`,
     name: 'Kaizen Cafe',
-    image: [`${SITE_URL}/images/cafe-interior.jpg`],
+    image: [
+      `${SITE_URL}/images/bakery-counter.jpg`,
+      `${SITE_URL}/images/cheesecake-slice.jpg`,
+      `${SITE_URL}/images/espresso-cake.jpg`,
+    ],
     url: SITE_URL,
     telephone: '+91-70995-10807',
     priceRange: '₹₹',
@@ -104,7 +108,7 @@ export function OpeningEventJsonLd() {
       name: 'Kaizen Cafe',
       url: SITE_URL,
     },
-    image: [`${SITE_URL}/images/cafe-interior.jpg`],
+    image: [`${SITE_URL}/images/cheesecake-slice.jpg`],
     description:
       'Grand opening of Kaizen Cafe — coffee, matcha, pizza, and a warm welcome in Garchuk, Guwahati.',
     offers: {

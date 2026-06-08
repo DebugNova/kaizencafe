@@ -4,14 +4,14 @@ import Image from "next/image"
 import { Reveal } from "./motion"
 
 const images = [
-  { src: "/images/croissant.jpg", alt: "Golden croissants on a teal plate", caption: "morning bake" },
-  { src: "/images/matcha.jpg", alt: "Matcha latte with whisk", caption: "first whisk" },
-  { src: "/images/cafe-interior.jpg", alt: "Cozy cafe interior", caption: "the room" },
-  { src: "/images/pizza.jpg", alt: "Wood-fired pizza", caption: "evening crust" },
-  { src: "/images/barista.jpg", alt: "Barista pouring latte art", caption: "the pour" },
-  { src: "/images/pastry-tray.jpg", alt: "Tray of fresh pastries", caption: "still warm" },
-  { src: "/images/coffee-beans.jpg", alt: "Roasted coffee beans", caption: "rested 14 days" },
-  { src: "/images/window-seat.jpg", alt: "Cozy window seat", caption: "your corner" },
+  { src: "/images/cheesecake-slice.jpg", alt: "A slice of chocolate cheesecake with a strawberry on top", caption: "the signature" },
+  { src: "/images/cookies-rack.jpg", alt: "Fresh cookies cooling on a wire rack", caption: "still warm" },
+  { src: "/images/bakery-counter.jpg", alt: "Inside Kaizen — the bakery counter", caption: "the room" },
+  { src: "/images/mango-tarts.jpg", alt: "Mango tarts topped with strawberries and basil", caption: "summer bake" },
+  { src: "/images/espresso-cake.jpg", alt: "An espresso shot beside a slice of cake", caption: "the pour" },
+  { src: "/images/brunch-plate.jpg", alt: "A slow brunch plate with toast and eggs", caption: "slow brunch" },
+  { src: "/images/banana-bread.jpg", alt: "Banana bread fresh from the oven", caption: "from the oven" },
+  { src: "/images/cookie-box.jpg", alt: "A box of loaded cookies to share", caption: "to share" },
 ]
 
 function Tile({

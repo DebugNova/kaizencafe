@@ -63,10 +63,10 @@ export const metadata: Metadata = {
       'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026 near Royal Global University, Garchuk, Guwahati.',
     images: [
       {
-        url: '/images/cafe-interior.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Kaizen Cafe — Guwahati',
+        url: '/images/cheesecake-slice.jpg',
+        width: 770,
+        height: 628,
+        alt: 'Kaizen Cafe — chocolate cheesecake with strawberries, Guwahati',
       },
     ],
   },
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     title: 'Kaizen — Cozy Cafe in Garchuk, Guwahati',
     description:
       'Specialty coffee, matcha, pizza, and live music nights. Opening 6 June 2026, Garchuk, Guwahati.',
-    images: ['/images/cafe-interior.jpg'],
+    images: ['/images/cheesecake-slice.jpg'],
   },
   robots: {
     index: true,

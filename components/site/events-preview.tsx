@@ -13,8 +13,8 @@ const tease = [
     note: "Full sets, warm lights, an attentive room.",
     when: "Fridays · soon",
     day: "Fri",
-    image: "/images/barista.jpg",
-    alt: "Barista at work behind the counter",
+    image: "/images/espresso-cake.jpg",
+    alt: "An espresso and a slice of cake on a sunlit cafe table",
   },
   {
     icon: Disc3,
@@ -22,8 +22,8 @@ const tease = [
     note: "Lo-fi, deep house, and a slow-built room.",
     when: "Saturdays · late",
     day: "Sat",
-    image: "/images/cafe-interior.jpg",
-    alt: "Warm cafe interior at night",
+    image: "/images/bakery-counter.jpg",
+    alt: "Inside Kaizen — the warm bakery counter",
   },
   {
     icon: Music,
@@ -31,8 +31,8 @@ const tease = [
     note: "Bring a song, a poem, or just a borrowed guitar.",
     when: "Sundays · acoustic",
     day: "Sun",
-    image: "/images/window-seat.jpg",
-    alt: "Quiet window seat in the cafe",
+    image: "/images/banana-bread.jpg",
+    alt: "A homemade loaf and fresh flowers on the cafe counter",
   },
 ]
 

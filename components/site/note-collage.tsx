@@ -6,7 +6,7 @@ import { Reveal } from "./motion"
 
 const notes = [
   {
-    text: "your favourite delicious croissant — here at Kaizen!",
+    text: "your favourite chocolate cheesecake — here at Kaizen!",
     className:
       "absolute -top-6 xs:-top-8 left-1 xs:left-0 sm:-left-2 md:-left-6 lg:-left-12 max-w-[8.5rem] xs:max-w-[10rem] sm:max-w-[14rem] text-lg xs:text-xl sm:text-3xl",
     rotate: -6,
@@ -14,7 +14,7 @@ const notes = [
     driftDelay: "0s",
   },
   {
-    text: "omg I know you've had croissants before…\nbut never quite like ours.",
+    text: "omg I know you've had cheesecake before…\nbut never quite like ours.",
     className:
       "hidden sm:block absolute top-4 right-0 md:-right-6 lg:-right-12 max-w-[14rem] text-2xl sm:text-3xl",
     rotate: 5,
@@ -22,7 +22,7 @@ const notes = [
     driftDelay: "1.2s",
   },
   {
-    text: "come taste us!\n(that sounds bad…)\ntaste our croissant!",
+    text: "come taste us!\n(that sounds bad…)\ntaste our cheesecake!",
     className:
       "absolute -bottom-2 xs:-bottom-4 left-1 xs:left-0 sm:-left-2 md:-left-6 lg:-left-10 max-w-[8.5rem] xs:max-w-[10rem] sm:max-w-[12rem] text-lg xs:text-xl sm:text-3xl",
     rotate: -4,
@@ -30,7 +30,7 @@ const notes = [
     driftDelay: "2.4s",
   },
   {
-    text: 'wait — was "croissant" once spelled "Prashant"?',
+    text: "wait — does cheesecake count as breakfast? here, absolutely.",
     className:
       "hidden sm:block absolute bottom-6 right-0 md:-right-4 lg:-right-10 max-w-[15rem] text-2xl sm:text-3xl",
     rotate: 6,
@@ -63,7 +63,7 @@ export function NoteCollage() {
             transition={{ duration: 0.8, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             className="self-start max-w-[15rem] origin-top-left font-script text-primary text-xl xs:text-2xl leading-snug drift-slow"
           >
-            your favourite delicious croissant — here at Kaizen!
+            your favourite chocolate cheesecake — here at Kaizen!
           </motion.p>
 
           <motion.p
@@ -74,7 +74,7 @@ export function NoteCollage() {
             style={{ animationDelay: "1.2s" }}
             className="self-end max-w-[15rem] origin-top-right text-right font-script text-primary text-xl xs:text-2xl leading-snug drift-slow whitespace-pre-line"
           >
-            {"omg I know you've had croissants before…\nbut never quite like ours."}
+            {"omg I know you've had cheesecake before…\nbut never quite like ours."}
           </motion.p>
 
           <div className="relative mx-auto my-2 w-full max-w-[14rem] xs:max-w-[16rem]">
@@ -96,8 +96,8 @@ export function NoteCollage() {
               className="relative aspect-[4/5] overflow-hidden rounded-sm border border-border/60 shadow-md"
             >
               <Image
-                src="/images/croissant.jpg"
-                alt="Two golden, flaky croissants on a teal-blue ribbed plate."
+                src="/images/chocolate-cheesecake.jpg"
+                alt="A rich chocolate cheesecake with strawberry topping on a cake stand."
                 fill
                 sizes="60vw"
                 loading="lazy"
@@ -114,7 +114,7 @@ export function NoteCollage() {
             style={{ animationDelay: "2.4s" }}
             className="self-start max-w-[14rem] origin-bottom-left font-script text-primary text-xl xs:text-2xl leading-snug drift-slow whitespace-pre-line"
           >
-            {"come taste us!\n(that sounds bad…)\ntaste our croissant!"}
+            {"come taste us!\n(that sounds bad…)\ntaste our cheesecake!"}
           </motion.p>
 
           <motion.p
@@ -125,7 +125,7 @@ export function NoteCollage() {
             style={{ animationDelay: "3.6s" }}
             className="self-end max-w-[16rem] origin-bottom-right text-right font-script text-primary text-xl xs:text-2xl leading-snug drift-slow"
           >
-            {'wait — was "croissant" once spelled "Prashant"?'}
+            {"wait — does cheesecake count as breakfast? here, absolutely."}
           </motion.p>
         </div>
 
@@ -171,8 +171,8 @@ export function NoteCollage() {
               className="relative aspect-[4/5] overflow-hidden rounded-sm border border-border/60 shadow-md"
             >
               <Image
-                src="/images/croissant.jpg"
-                alt="Two golden, flaky croissants on a teal-blue ribbed plate."
+                src="/images/chocolate-cheesecake.jpg"
+                alt="A rich chocolate cheesecake with strawberry topping on a cake stand."
                 fill
                 sizes="(min-width: 768px) 18rem, 60vw"
                 loading="lazy"

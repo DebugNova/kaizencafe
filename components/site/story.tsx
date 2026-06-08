@@ -239,11 +239,11 @@ export function Story() {
           >
             <motion.div style={{ y }} className="absolute inset-0 -top-10 -bottom-10">
               <Image
-                src="/images/cafe-interior.jpg"
-                alt="A glimpse inside Kaizen — warm wood tables, soft pendant lights, and a small espresso bar."
+                src="/images/bakery-counter.jpg"
+                alt="Kaizen's bakery counter — strawberry danish, cheesecake, and fresh-baked pastries under warm light, with a vase of soft pink blooms."
                 fill
                 sizes="(min-width: 768px) 40vw, 90vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </motion.div>
             <motion.div
